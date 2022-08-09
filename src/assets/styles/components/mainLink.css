@@ -1,0 +1,40 @@
+.main-link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+}
+
+.main-link label{
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.main-link .icon-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    height: 55px;
+    width: 55px;
+    background-color: #9842A6;
+    border-radius: 8px;
+}
+
+.main-link:focus{
+    outline: none;
+}
+
+.main-link:hover .icon-wrapper{
+    background-color: #b96ac5;
+}
+
+.main-link:focus .icon-wrapper{
+    background-color: #b96ac5;
+}
+
+.main-link svg{
+    height: 70%;
+    width: 70%;
+    color: white;
+}
