@@ -8,7 +8,7 @@ export default function Settings() {
                 <h1 className="name-icon">J</h1>
                 <h1 className="name">Janik Kurtz</h1>
             </div>
-            <div className="settings">
+            <form className="settings">
                 <div className="form-group">
                     <label>Name</label>
                     <input type="text" placeholder="Name" className="form-control" />
@@ -32,7 +32,7 @@ export default function Settings() {
                 </details>
                 <button className="main-button">Save</button>
                 <button className="delete-button">Delete Account</button>
-            </div>
+            </form>
         </main>
     )
 }

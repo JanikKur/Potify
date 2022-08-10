@@ -11,7 +11,7 @@ export default function Home() {
     <main>
       <SearchBar />
       <div className="main-links-wrapper">
-        <MainLink icon={<BiMicrophone />} text="My Podcasts" href="/" />
+        <MainLink icon={<BiMicrophone />} text="My Podcasts" href="/mypodcasts" />
         <MainLink icon={<BiHeart />} text="Favorites" href="/" />
         <MainLink icon={<BiTrendingUp />} text="Trends" href="/" />
         <MainLink icon={<FiSettings />} text="Settings" href="/settings" />

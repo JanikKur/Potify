@@ -17,6 +17,7 @@ export default function Navigation() {
                 <Link to="/search" className="nav-link">Podcasts</Link>
                 <Link to="/" className="nav-link">Favorites</Link>
                 <Link to="/mypodcasts" className="nav-link">My Podcasts</Link>
+                <Link to="/addpodcast" className="nav-link">Add Podcast</Link>
             </div>
             <div className="right">
                     <button className="search-button"><AiOutlineSearch/></button>

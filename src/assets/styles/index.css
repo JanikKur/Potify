@@ -42,3 +42,25 @@ h2{
     margin: 0 0 1rem 0;
     text-decoration: underline;
 }
+
+.form-group{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.form-group label{
+    font-size: 18px;
+}
+
+.form-group .form-control{
+    height: 42px;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.5);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.25) inset;
+    font-size: 100%;
+    padding: 1rem;
+}
