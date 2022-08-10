@@ -16,7 +16,7 @@ export default function Navigation() {
             <div onClick={() => setShowMenu(false)} className={`nav-links ${!showMenu ? 'collapse' : ''}`}>
                 <Link to="/search" className="nav-link">Podcasts</Link>
                 <Link to="/" className="nav-link">Favorites</Link>
-                <Link to="/" className="nav-link">Potify</Link>
+                <Link to="/mypodcasts" className="nav-link">My Podcasts</Link>
             </div>
             <div className="right">
                     <button className="search-button"><AiOutlineSearch/></button>
