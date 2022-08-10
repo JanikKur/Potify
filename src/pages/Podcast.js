@@ -18,7 +18,8 @@ export default function Podcast() {
     }
 
     useEffect(() => {
-        getPodcastById('62f38940662a95ffecfa96e7').then(res => { 
+        const id = new URLSearchParams(window.location.search).get('id');
+        getPodcastById(id !== "undefined" ? id : '62f38940662a95ffecfa96e7').then(res => { //TODO
             setPodcast(res.data.podcast);
         })
     },[]);

@@ -22,7 +22,7 @@ export default function PodcastList({title}) {
     if(!podcasts) return null;
     return (
         <div className="podcast-list">
-            {podcasts.map(podcast => <PodcastItem key={podcast._id} data={podcast} />)}
+            {podcasts.length ? podcasts.map(podcast => <PodcastItem key={podcast._id} data={podcast} />) : 'No Podcasts Found'}
         </div>
     )
 }
