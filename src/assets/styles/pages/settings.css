@@ -39,15 +39,6 @@
     width: 100%;
 }
 
-.new-password-wrapper .form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
 .new-password-wrapper summary{
     color: #096BA3;
     text-decoration: underline;

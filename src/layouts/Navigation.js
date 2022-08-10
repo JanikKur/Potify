@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import {AiOutlineSearch, AiOutlineMenu} from 'react-icons/ai';
 import '../assets/styles/layouts/navigation.css';
+import UserIcon from '../components/UserIcon';
 
 export default function Navigation() {
 
@@ -21,7 +22,7 @@ export default function Navigation() {
             </div>
             <div className="right">
                     <button className="search-button"><AiOutlineSearch/></button>
-                    <Link to="/settings" className="user-icon">J</Link>
+                    <UserIcon name='J' />
             </div>
         </nav>
     )
