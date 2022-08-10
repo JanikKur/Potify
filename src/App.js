@@ -3,6 +3,7 @@ import Navigation from "./layouts/Navigation";
 import Home from "./pages/Home";
 import Podcast from "./pages/Podcast";
 import Search from "./pages/Search";
+import Settings from "./pages/Settings";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/search" element={<Search/>} />
           <Route path="/podcast" element={<Podcast/>} />
+          <Route path="/settings" element={<Settings/>} />
         </Routes>
       </Router>
     </div>

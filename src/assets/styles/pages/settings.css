@@ -1,0 +1,87 @@
+.user-informations{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.name-icon{
+    background-color: #CD3333;
+    height: 160px;
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 50%;
+    font-weight: 100;
+    font-size: 40px;
+    margin: 0;
+}
+
+.name{
+    margin: 0;
+    font-weight: 100;
+}
+
+
+.settings{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.form-group{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.form-group label{
+    font-size: 18px;
+}
+
+.form-group .form-control{
+    height: 42px;
+    width: 100%;
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.25) inset;
+    font-size: 100%;
+    padding: 1rem;
+}
+
+.new-password-wrapper{
+    width: 100%;
+}
+
+.new-password-wrapper .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.new-password-wrapper summary{
+    color: #096BA3;
+    text-decoration: underline;
+    cursor: pointer;
+    list-style: none;
+}
+
+.delete-button{
+    border: none;
+    background-color: transparent;
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 15px;
+}

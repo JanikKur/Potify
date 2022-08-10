@@ -21,3 +21,17 @@ main{
 svg{
     color: black;
 }
+
+
+.main-button{
+    border: none;
+    color: white;
+    background-color: #70CBFF;
+    height: 44px;
+    width: 129px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    cursor: pointer;
+}

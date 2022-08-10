@@ -14,7 +14,7 @@ export default function Home() {
         <MainLink icon={<BiMicrophone />} text="My Podcasts" href="/" />
         <MainLink icon={<BiHeart />} text="Favorites" href="/" />
         <MainLink icon={<BiTrendingUp />} text="Trends" href="/" />
-        <MainLink icon={<FiSettings />} text="Settings" href="/" />
+        <MainLink icon={<FiSettings />} text="Settings" href="/settings" />
       </div>
       <div>
         <p>Beliebte Podcasts</p>

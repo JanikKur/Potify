@@ -20,7 +20,7 @@ export default function Navigation() {
             </div>
             <div className="right">
                     <button className="search-button"><AiOutlineSearch/></button>
-                    <div className="user-icon">J</div>
+                    <Link to="/settings" className="user-icon">J</Link>
             </div>
         </nav>
     )
