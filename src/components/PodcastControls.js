@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../assets/styles/components/podcastControls.css';
 import { MdOutlineForward10, MdOutlineReplay10, MdOutlinePause, MdOutlinePlayArrow, MdVolumeDownAlt } from 'react-icons/md';
 
-export default function PodcastControls({podcast}) {
+export default function PodcastControls({episode}) {
 
     const [hideVolume, setHideVolume] = useState(true);
     const [isPlaying, setIsPlaying] = useState(true);
@@ -13,36 +13,41 @@ export default function PodcastControls({podcast}) {
 
 
     useEffect(() => {
-        podcast.addEventListener("timeupdate", e => {
+        episode.addEventListener("timeupdate", e => {
             let percentage = e.target.currentTime / e.target.duration * 100;
             progressBarRef.current.value = Math.round(percentage);
             updatedWhatchedTime(Math.round(percentage));
             
             setTimestamp(`${(Math.floor(e.target.currentTime / 60) + "")}:${(Math.floor(e.target.currentTime % 60) + "").padStart(2, '0')} / ${(Math.floor(e.target.duration / 60) + "")}:${(Math.floor(e.target.duration % 60) + "").padStart(2, '0')}`);
 
-            let bufferedSeconds = podcast.buffered.end(0) - podcast.buffered.start(0);
+            let bufferedSeconds = episode.buffered.end(0) - episode.buffered.start(0);
             updateBufferedLine(Math.round(bufferedSeconds / e.target.duration * 100));
         });
-        podcast.addEventListener("ended",() => setIsPlaying(false));
-        podcast.autoplay = true;
-    }, [podcast]);
+        episode.addEventListener("ended",() => setIsPlaying(false));
+        episode.autoplay = true;
+    }, [episode]);
+
+
+    useEffect(() => {
+        setIsPlaying(!episode.paused);
+    },[episode.paused]);
 
 
     function togglePlaying(){
         if(isPlaying){
-            podcast.pause()
+            episode.pause()
         }else{
-            podcast.play()
+            episode.play()
         }
         setIsPlaying(!isPlaying);
     }
 
     function updateTime(e){
-        podcast.currentTime = podcast.duration / 100 * e.target.value;
+        episode.currentTime = episode.duration / 100 * e.target.value;
     }
 
     function addSeconds(seconds){
-        podcast.currentTime = podcast.currentTime + seconds;
+        episode.currentTime = episode.currentTime + seconds;
     }
 
     function updatedWhatchedTime(percentage){
@@ -53,7 +58,7 @@ export default function PodcastControls({podcast}) {
         bufferedLineRef.current.style.width = percentage + "%";
     }
 
-
+    if(!episode.src) return null;
     return (
         <nav className="episode-play-controls">
             <div className="progress-bar-wrapper">
@@ -69,7 +74,7 @@ export default function PodcastControls({podcast}) {
                 <div className="volume-controls">
                     <button className="control-btn volume" onClick={() => setHideVolume(!hideVolume)}><MdVolumeDownAlt className="icon" /></button>
                     <div className={`volume-bar ${hideVolume ? 'hide' : ''}`}>
-                        <input type="range" defaultValue={podcast.volume * 100} onClick={e => {podcast.volume = e.target.value / 100}} className="progress-bar" />
+                        <input type="range" defaultValue={episode.volume * 100} onChange={e => {episode.volume = e.target.value / 100}} className="progress-bar" />
                     </div>
                 </div>
                 <button className="control-btn rev" onClick={() => addSeconds(-10)}><MdOutlineReplay10 className="icon" /></button>
