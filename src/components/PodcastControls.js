@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../assets/styles/components/podcastControls.css';
 import { MdOutlineForward10, MdOutlineReplay10, MdOutlinePause, MdOutlinePlayArrow, MdVolumeDownAlt } from 'react-icons/md';
 
-export default function PodcastControls({episode}) {
+export default function PodcastControls({title, episode}) {
 
     const [hideVolume, setHideVolume] = useState(true);
     const [isPlaying, setIsPlaying] = useState(true);
@@ -10,7 +10,6 @@ export default function PodcastControls({episode}) {
     const progressBarRef = useRef();
     const whatchedTimeLineRef = useRef();
     const bufferedLineRef = useRef();
-
 
     useEffect(() => {
         episode.addEventListener("timeupdate", e => {
@@ -67,7 +66,7 @@ export default function PodcastControls({episode}) {
                 <div className="progress-bar-buffered" ref={bufferedLineRef}></div>
             </div>
             <div className="episode-informations2">
-                <label>Von Fritz Meinecke ...</label>
+                <label>{title.substring(0,15)}...</label>
                 <label>{timestamp}</label>
             </div>
             <div className="control-buttons">

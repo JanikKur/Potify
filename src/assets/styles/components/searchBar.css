@@ -11,7 +11,7 @@
 
 .submit-button{
     height: 100%;
-    aspect-ratio: 1/1;
+    width: fit-content;
     background: transparent;
     border: none;
     cursor: pointer;

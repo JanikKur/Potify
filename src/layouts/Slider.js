@@ -17,7 +17,7 @@ export default function Slider() {
   if(!podcasts) return null;
   return (
     <Carousel showArrows={false} showIndicators={false} showThumbs={false} showStatus={false} autoPlay={false}>
-          {podcasts.map(podcast => <PodcastItem key={podcast._id} data={podcast} />)}
+          {podcasts.map((podcast, idx) => <div className="page" key={podcast._id}><PodcastItem data={podcast} /></div>)}
     </Carousel>
   )
 }
