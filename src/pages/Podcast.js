@@ -5,7 +5,7 @@ import {RiDeleteBin6Line} from 'react-icons/ri';
 import Episode from '../components/Episode';
 import PodcastControls from '../components/PodcastControls';
 import { Link } from 'react-router-dom';
-import { getPodcast } from '../services/podcast';
+import { getPodcastById } from '../services/podcast';
 
 export default function Podcast() {
 
@@ -18,7 +18,7 @@ export default function Podcast() {
     }
 
     useEffect(() => {
-        getPodcast('62f38940662a95ffecfa96e7').then(res => { 
+        getPodcastById('62f38940662a95ffecfa96e7').then(res => { 
             setPodcast(res.data.podcast);
         })
     },[]);

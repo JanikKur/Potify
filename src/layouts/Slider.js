@@ -7,7 +7,7 @@ export default function Slider() {
   return (
     <Carousel showArrows={false} showIndicators={false} showThumbs={false} showStatus={false} autoPlay={false}>
           <div className="page">
-            <PodcastItem />
+            <PodcastItem/>
             <PodcastItem />
           </div>
           <div className="page">

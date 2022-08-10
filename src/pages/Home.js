@@ -5,11 +5,18 @@ import { BiMicrophone, BiHeart, BiTrendingUp } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi';
 import MainLink from '../components/MainLink';
 import Slider from '../layouts/Slider';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+
+  let navigate = useNavigate();
+  let submit = title => {
+    navigate(`/search?q=${title}`);
+  }
+
   return (
     <main>
-      <SearchBar />
+      <SearchBar onSubmit={submit} />
       <div className="main-links-wrapper">
         <MainLink icon={<BiMicrophone />} text="My Podcasts" href="/mypodcasts" />
         <MainLink icon={<BiHeart />} text="Favorites" href="/" />
@@ -18,7 +25,7 @@ export default function Home() {
       </div>
       <div>
         <p>Beliebte Podcasts</p>
-        <Slider/>
+        <Slider />
       </div>
     </main>
   )
