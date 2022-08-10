@@ -29,7 +29,7 @@
     gap: .5rem;
 }
 
-.podcast-informations .podcast-controls .icon-button{
+.podcast-informations .podcast-controls>.icon-button,.icon-link{
     background: transparent;
     border: none;
     height: 30px;
@@ -38,7 +38,7 @@
     cursor: pointer;
 }
 
-.icon-button svg{
+.icon-button svg, .icon-link svg{
     height: 100%;
     width: 100%;
 }

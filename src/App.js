@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./layouts/Navigation";
+import AddEpisode from "./pages/AddEpisode";
 import AddPodcast from "./pages/AddPodcast";
 import Home from "./pages/Home";
 import MyPodcasts from "./pages/MyPodcasts";
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/settings" element={<Settings/>} />
           <Route path="/mypodcasts" element={<MyPodcasts/>} />
           <Route path="/addpodcast" element={<AddPodcast/>} />
+          <Route path="/addepisode" element={<AddEpisode/>} />
         </Routes>
       </Router>
     </div>

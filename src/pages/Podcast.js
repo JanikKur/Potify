@@ -5,6 +5,7 @@ import {BiHeart,BiAddToQueue} from 'react-icons/bi';
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import Episode from '../components/Episode';
 import PodcastControls from '../components/PodcastControls';
+import { Link } from 'react-router-dom';
 
 export default function Podcast() {
     return (
@@ -16,7 +17,7 @@ export default function Podcast() {
                 <h4>Mit Monte und Unge</h4>
                 <div className="podcast-controls">
                     <button className="icon-button"><BiHeart/></button>
-                    <button className="icon-button"><BiAddToQueue/></button>
+                    <Link to='/addepisode' className="icon-link"><BiAddToQueue/></Link>
                     <button className="icon-button"><RiDeleteBin6Line/></button>
                 </div>
             </div>
