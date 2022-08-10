@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../assets/styles/pages/podcast.css';
 import TestImage from '../assets/images/index.png';
 import {BiHeart,BiAddToQueue} from 'react-icons/bi';
@@ -8,6 +8,19 @@ import PodcastControls from '../components/PodcastControls';
 import { Link } from 'react-router-dom';
 
 export default function Podcast() {
+
+    //const [podcast, setPodcast] = useState(null);
+    const [currentEpisode, setCurrentEpisode] = useState(new Audio('http://localhost:5000/api/v1/podcast/play/17e04694-0258-40e6-81b1-94bbcede0737.m4a'));
+
+    function updateEpisode(podcastLink) {
+        currentEpisode.pause();
+        setCurrentEpisode((prev) => { return new Audio(podcastLink) })
+    } 
+
+    useEffect(() => {
+        updateEpisode('http://192.168.2.100:5000/api/v1/podcast/play/17e04694-0258-40e6-81b1-94bbcede0737.m4a');
+    },[]);
+
     return (
         <>
         <main className="podcast">
@@ -30,7 +43,7 @@ export default function Podcast() {
                 <Episode image={TestImage} title="Von Fritz Meinecke und illegalen Straßenrennen" />
             </div>
         </main>
-        <PodcastControls/>
+        <PodcastControls podcast={currentEpisode}/>
         </>
     )
 }
