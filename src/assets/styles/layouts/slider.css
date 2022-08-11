@@ -5,3 +5,13 @@
     justify-content: center;
     padding: 1rem;
 }
+
+.slick-track{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+.slick-list{
+    padding: .5rem !important;
+}

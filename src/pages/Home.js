@@ -4,7 +4,7 @@ import '../assets/styles/pages/home.css';
 import { BiMicrophone, BiHeart, BiTrendingUp } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi';
 import MainLink from '../components/MainLink';
-import Slider from '../layouts/Slider';
+import PodcastSlider from '../layouts/PodcastSlider';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
       </div>
       <div>
         <p>Beliebte Podcasts</p>
-        <Slider />
+        <PodcastSlider />
       </div>
     </main>
   )
