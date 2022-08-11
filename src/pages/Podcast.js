@@ -4,7 +4,6 @@ import {BiHeart,BiAddToQueue} from 'react-icons/bi';
 import {BsFillHeartFill} from 'react-icons/bs';
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import Episode from '../components/Episode';
-import PodcastControls from '../components/PodcastControls';
 import { Link } from 'react-router-dom';
 import { getPodcastById } from '../services/podcast';
 import {useUser} from '../contexts/UserContext';
