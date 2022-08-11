@@ -8,6 +8,10 @@ export async function getPodcastById(id){
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/id/${id}`);
 }
 
+export async function getPodcastByIds(ids){
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/ids/${JSON.stringify(ids)}`);
+}
+
 export async function getPodcastByAuthor(id){
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/author/${id}`);
 }

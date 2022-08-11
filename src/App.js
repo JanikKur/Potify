@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import Search from "./pages/Search";
 import Settings from "./pages/Settings";
 import PodcastControls from "./components/PodcastControls";
+import Favorites from "./pages/Favorites";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/mypodcasts" element={<MyPodcasts/>} />
             <Route path="/addpodcast" element={<AddPodcast/>} />
             <Route path="/addepisode" element={<AddEpisode/>} />
+            <Route path="/favorites" element={<Favorites/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="*" element={<NotFound/>} />

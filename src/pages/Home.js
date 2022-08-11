@@ -19,7 +19,7 @@ export default function Home() {
       <SearchBar onSubmit={submit} />
       <div className="main-links-wrapper">
         <MainLink icon={<BiMicrophone />} text="My Podcasts" href="/mypodcasts" />
-        <MainLink icon={<BiHeart />} text="Favorites" href="/" />
+        <MainLink icon={<BiHeart />} text="Favorites" href="/favorites" />
         <MainLink icon={<BiTrendingUp />} text="Trends" href="/" />
         <MainLink icon={<FiSettings />} text="Settings" href="/settings" />
       </div>

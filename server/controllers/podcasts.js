@@ -23,10 +23,10 @@ const getPodcast = async (req, res) => {
 }
 
 const getPodcastByIds = async (req, res) => {
-    const ids = JSON.parse(req.params.ids);
     try {
-        const podcast = await Podcast.find({_id: {$in: ids}});
-        res.status(200).json({ podcast });
+        const ids = JSON.parse(req.params.ids);
+        const podcasts = await Podcast.find({_id: {$in: ids}});
+        res.status(200).json({ podcasts });
     }
     catch (err) {
         res.status(500).json({ msg: err });
