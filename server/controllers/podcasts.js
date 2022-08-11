@@ -22,6 +22,18 @@ const getPodcast = async (req, res) => {
     }
 }
 
+const getPodcastByIds = async (req, res) => {
+    const ids = JSON.parse(req.params.ids);
+    try {
+        const podcast = await Podcast.find({_id: {$in: ids}});
+        res.status(200).json({ podcast });
+    }
+    catch (err) {
+        res.status(500).json({ msg: err });
+    }
+}
+
+
 const getPodcastsByAuthor = async (req, res) => {
     try {
         const podcasts = await Podcast.find({ author: req.params.id });
@@ -123,6 +135,7 @@ const deletePodcast = async (req, res) => {
 module.exports = {
     getAllPodcasts,
     getPodcast,
+    getPodcastByIds,
     getPodcastsByAuthor,
     getPodcastsByTitle,
     playPodcast,

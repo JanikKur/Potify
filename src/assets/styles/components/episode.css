@@ -8,7 +8,7 @@
 .episode img{
     height: 97px;
     width: 97px;
-    object-fit: contain;
+    object-fit: cover;
     border: 1px solid black;
     border-radius: 18px;
 }

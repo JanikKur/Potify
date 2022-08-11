@@ -52,6 +52,7 @@
     width: 155px;
     border-radius: 26px;
     aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .podcast-informations>h2,h4{
