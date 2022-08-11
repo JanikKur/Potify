@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import PodcastItem from '../components/PodcastItem';
-import '../assets/styles/layouts/slider.css';
-import { getAllPodcasts } from '../services/podcast';
+import React from 'react'
+import PodcastItem from './PodcastItem';
+import '../assets/styles/components/slider.css';
 import Slider from "react-slick";
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
 
 
-export default function PodcastSlider() {
-
-  const [podcasts, setPodcasts] = useState();
-
-  useEffect(() => {
-    getAllPodcasts().then(res => {
-      setPodcasts(res.data.podcasts);
-    });
-  }, []);
+export default function PodcastSlider({podcasts}) {
 
   const settings = {
     dots: false,
     infinite: false,
+    arrows: false,
+    centerPadding: true,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2

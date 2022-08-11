@@ -4,8 +4,8 @@ import '../assets/styles/pages/home.css';
 import { BiMicrophone, BiHeart, BiTrendingUp } from 'react-icons/bi';
 import { FiSettings } from 'react-icons/fi';
 import MainLink from '../components/MainLink';
-import PodcastSlider from '../layouts/PodcastSlider';
 import { useNavigate } from 'react-router-dom';
+import SubscribedPodcastSlider from '../layouts/SubscribedPodcastSlider';
 
 export default function Home() {
 
@@ -23,10 +23,7 @@ export default function Home() {
         <MainLink icon={<BiTrendingUp />} text="Trends" href="/" />
         <MainLink icon={<FiSettings />} text="Settings" href="/settings" />
       </div>
-      <div>
-        <p>Beliebte Podcasts</p>
-        <PodcastSlider />
-      </div>
+      <SubscribedPodcastSlider/>
     </main>
   )
 }

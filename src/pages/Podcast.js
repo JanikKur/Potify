@@ -8,19 +8,14 @@ import PodcastControls from '../components/PodcastControls';
 import { Link } from 'react-router-dom';
 import { getPodcastById } from '../services/podcast';
 import {useUser} from '../contexts/UserContext';
+import {useEpisode} from '../contexts/EpisodeContext';
 
 export default function Podcast() {
 
     const [podcast, setPodcast] = useState(null);
-    const [currentEpisode, setCurrentEpisode] = useState(new Audio());
-    const [currentTitle, setCurrentTitle] = useState('');
 
+    const {currentEpisode, updateEpisode, currentTitle, setCurrentTitle} = useEpisode();
     const {currentUser, toggleSubscription, isSubscribed} = useUser();
-
-    function updateEpisode(podcastLink) {
-        currentEpisode.pause();
-        setCurrentEpisode((prev) => { return new Audio(podcastLink) })
-    }
 
     useEffect(() => {
         const id = new URLSearchParams(window.location.search).get('id');
@@ -29,7 +24,8 @@ export default function Podcast() {
         })
     },[]);
 
-    if(!podcast) return null;
+
+    if(!podcast || !currentEpisode) return null;
     return (
         <>
         <main className="podcast">
@@ -48,7 +44,6 @@ export default function Podcast() {
                 {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} title={episode.title} />)}
             </div>
         </main>
-        <PodcastControls title={currentTitle} episode={currentEpisode}/>
         </>
     )
 }

@@ -16,6 +16,7 @@ main{
     max-width: 1000px;
     margin: auto;
     margin-top: 60px;
+    margin-bottom: 100px;
 }
 
 svg{

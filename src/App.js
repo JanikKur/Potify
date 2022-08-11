@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
+import { EpisodeProvider } from "./contexts/EpisodeContext";
 import Navigation from "./layouts/Navigation";
 import AddEpisode from "./pages/AddEpisode";
 import AddPodcast from "./pages/AddPodcast";
@@ -11,11 +12,13 @@ import Podcast from "./pages/Podcast";
 import Register from "./pages/Register";
 import Search from "./pages/Search";
 import Settings from "./pages/Settings";
+import PodcastControls from "./components/PodcastControls";
 
 export default function App() {
   return (
     <div className="App">
       <Router>
+        <EpisodeProvider>
         <UserProvider>
           <Navigation/>
           <Routes>
@@ -30,7 +33,9 @@ export default function App() {
             <Route path="/register" element={<Register/>} />
             <Route path="*" element={<NotFound/>} />
           </Routes>
+          <PodcastControls/>
         </UserProvider>
+        </EpisodeProvider>
       </Router>
     </div>
   );
