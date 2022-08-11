@@ -1,5 +1,6 @@
 const Podcast = require('../models/Podcast');
 const fs = require('fs');
+const path = require('path');
 
 const getAllPodcasts = async (req, res) => {
     try {
@@ -42,7 +43,7 @@ const getPodcastsByTitle = async (req, res) => {
 }
 
 const playPodcast = async (req, res) => {
-    const file = 'D:/Desktop/Websites/potifyFrontend/server/public/podcasts/' + req.params.file;
+    const file = path.join(__dirname + '/../public/podcasts/' + req.params.file);
     let stat = null;
     try{
         stat = fs.statSync(file);
