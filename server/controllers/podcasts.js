@@ -90,7 +90,7 @@ const updatePodcast = async (req, res) => {
 
 const addEpisode = async (req, res) => {
     try {
-        const podcast = await Podcast.updateOne({ _id: req.params.id }, { $push: { episodes: { ...req.body } } });
+        const podcast = await Podcast.updateOne({ _id: req.params.id }, { $push: { episodes: { ...req.body, date: new Date().getTime() } } });
         res.status(200).json({ podcast });
     }
     catch (err) {

@@ -35,7 +35,7 @@ export default function Podcast() {
                 <h4>{podcast.description}</h4>
                 <div className="podcast-controls">
                     <button className="icon-button"><BiHeart/></button>
-                    <Link to='/addepisode' className="icon-link"><BiAddToQueue/></Link>
+                    <Link to={`/addepisode?id=${podcast._id}`} className="icon-link"><BiAddToQueue/></Link>
                     <button className="icon-button"><RiDeleteBin6Line/></button>
                 </div>
             </div>

@@ -15,3 +15,19 @@ export async function getPodcastByAuthor(id){
 export async function getPodcastByTitle(title){
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/title/${title}`);
 }
+
+export async function addPodcast(title, description, genre, image){
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('genre', genre);
+    formData.append('file', image);
+    return axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+}
+
+export async function addEpisode(podcastId, title, file){
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('file', file);
+    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/addEpisode/${podcastId}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+}

@@ -23,7 +23,7 @@ export function UserProvider({ children }) {
 
     useEffect(() => {
         axios.get(`${backendLink}/user/validate`, {}, { withCredentials: true }).then(res => {
-            setCurrentUser(res.data);
+            setCurrentUser(res.data.user);
         }).catch(error => {
         })
     }, []);
@@ -48,7 +48,7 @@ export function UserProvider({ children }) {
         try {
             const result = await axios.post(`${backendLink}/user/login`, formData, { withCredentials: true });
             if (result.status === 200) {
-                setCurrentUser(result.data);
+                setCurrentUser(result.data.user);
                 navigate('/');
             }
         }
