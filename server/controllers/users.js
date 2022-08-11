@@ -78,6 +78,17 @@ const subscribePodcast = async (req, res) => {
     }
 }
 
+//Unsubscribe a Podcast
+const unsubscribePodcast = async (req, res) => {
+    try {
+        const user = await User.updateOne({ _id: req.user._id }, { $pull: {subscriptions: req.params.id} });
+        res.status(200).json({ user });
+    }
+    catch (err) {
+        res.status(500).json({ msg: err });
+    }
+}
+
 //Add a User
 const addUser = async (req, res) => {
     try {
@@ -117,6 +128,7 @@ module.exports = {
     validateUser,
     updateUser,
     subscribePodcast,
+    unsubscribePodcast,
     addUser,
     logout,
     deleteUser

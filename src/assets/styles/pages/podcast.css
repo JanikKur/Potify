@@ -43,6 +43,10 @@
     width: 100%;
 }
 
+.subscribed{
+    fill: red;
+}
+
 .podcast-informations img{
     border: 1px solid black;
     width: 155px;

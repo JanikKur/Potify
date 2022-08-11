@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { remove } from '../utils/removeElement';
 const UserContext = React.createContext();
 const backendLink = process.env.REACT_APP_BACKEND_URL + '/api/v1';
 
@@ -95,6 +96,47 @@ export function UserProvider({ children }) {
         }
     }
 
+    async function subscribePodcast(podcastId) {
+        try{
+            await axios.put(`${backendLink}/user/subscribepodcast/${podcastId}`, { withCredentials: true });
+            setCurrentUser(prev => {
+                if(!prev.subscriptions.includes(podcastId)) {
+                    prev.subscriptions.push(podcastId);
+                }
+                return {...prev};
+            });
+        }
+        catch(err){
+            throw new Error(err);
+        }
+    }
+
+    async function unsubscribePodcast(podcastId) {
+        try{
+            await axios.put(`${backendLink}/user/unsubscribepodcast/${podcastId}`, { withCredentials: true });
+            setCurrentUser(prev => {
+                prev.subscriptions = remove(prev.subscriptions, podcastId);
+                return {...prev};
+            });
+        }
+        catch(err){
+            throw new Error(err);
+        }
+    }
+
+    
+    async function toggleSubscription(podcastId){
+        if(isSubscribed(podcastId)){
+            unsubscribePodcast(podcastId);
+        }
+        else{
+            subscribePodcast(podcastId);
+        }
+    }
+    
+    function isSubscribed(podcastId){
+        return currentUser.subscriptions.includes(podcastId);
+    }
 
     const value = {
         currentUser,
@@ -102,7 +144,9 @@ export function UserProvider({ children }) {
         logout,
         loginUser,
         registerUser,
-        updateUserData
+        updateUserData,
+        toggleSubscription,
+        isSubscribed
     };
 
     return (

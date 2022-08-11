@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import '../assets/styles/pages/podcast.css';
 import {BiHeart,BiAddToQueue} from 'react-icons/bi';
+import {BsFillHeartFill} from 'react-icons/bs';
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import Episode from '../components/Episode';
 import PodcastControls from '../components/PodcastControls';
 import { Link } from 'react-router-dom';
 import { getPodcastById } from '../services/podcast';
+import {useUser} from '../contexts/UserContext';
 
 export default function Podcast() {
 
     const [podcast, setPodcast] = useState(null);
     const [currentEpisode, setCurrentEpisode] = useState(new Audio());
     const [currentTitle, setCurrentTitle] = useState('');
+
+    const {currentUser, toggleSubscription, isSubscribed} = useUser();
 
     function updateEpisode(podcastLink) {
         currentEpisode.pause();
@@ -34,7 +38,7 @@ export default function Podcast() {
                 <h2>{podcast.title}</h2>
                 <h4>{podcast.description}</h4>
                 <div className="podcast-controls">
-                    <button className="icon-button"><BiHeart/></button>
+                    {currentUser && <button className="icon-button" onClick={() => toggleSubscription(podcast._id)}>{isSubscribed(podcast._id) ? <BsFillHeartFill className="subscribed"/> : <BiHeart/>}</button>}
                     <Link to={`/addepisode?id=${podcast._id}`} className="icon-link"><BiAddToQueue/></Link>
                     <button className="icon-button"><RiDeleteBin6Line/></button>
                 </div>

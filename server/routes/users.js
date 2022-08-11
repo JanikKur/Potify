@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('../lib/passport');
-const { getAllUsers, getUser, login, validateUser, addUser, updateUser, subscribePodcast, logout, deleteUser } = require('../controllers/users');
+const { getAllUsers, getUser, login, validateUser, addUser, updateUser, subscribePodcast, unsubscribePodcast, logout, deleteUser } = require('../controllers/users');
 const validateUserToken = require('../utils/validateUserToken');
 
 
@@ -16,6 +16,8 @@ router.get('/validate', validateUserToken, validateUser);
 router.put('/:id', validateUserToken, updateUser);
 
 router.put('/subscribepodcast/:id', validateUserToken, subscribePodcast);
+
+router.put('/unsubscribepodcast/:id', validateUserToken, unsubscribePodcast);
 
 router.post('/login', passport.authenticate('local', {session: false}), login);
 
