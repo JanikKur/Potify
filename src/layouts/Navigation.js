@@ -25,7 +25,7 @@ export default function Navigation() {
             </div>
             <div className="right">
                     <button className="search-button"><AiOutlineSearch/></button>
-                    {currentUser ? <UserIcon name='J' /> : <div><Link to="/login" className="nav-link">Log In</Link>/<Link to="/register" className="nav-link">Sign Up</Link></div>}
+                    {currentUser ? <UserIcon name={currentUser.username[0].toUpperCase()} /> : <div><Link to="/login" className="nav-link">Log In</Link>/<Link to="/register" className="nav-link">Sign Up</Link></div>}
             </div>
         </nav>
     )

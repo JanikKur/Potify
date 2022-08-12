@@ -86,7 +86,7 @@ export function UserProvider({ children }) {
             formData.append(elem, newData[elem]);
         }
         try {
-            const result = await axios.put(`${backendLink}/user/${currentUser.id}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+            const result = await axios.put(`${backendLink}/user/${currentUser._id}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
             if (result.status === 200) {
                 window.location.reload();
             }
