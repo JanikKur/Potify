@@ -12,7 +12,6 @@ export default function MyPodcasts() {
 
   useEffect(() => {
     if(currentUser){
-      console.log(currentUser);
       getPodcastByAuthor(currentUser._id).then(res => {
         setPodcasts(res.data.podcasts)
       })

@@ -26,6 +26,7 @@ module.exports = function saveFile(req, res, next) {
                 fileLink = `/images/${uuid.v4()}.${extension}`
                 file.mv(`${__dirname}/../public${fileLink}`);
             } else {
+                console.log(file.duration);
                 fileLink = `${uuid.v4()}.${extension}`
                 file.mv(`${__dirname}/../public/podcasts/${fileLink}`);
             }

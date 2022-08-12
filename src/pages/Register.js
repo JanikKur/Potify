@@ -20,15 +20,15 @@ export default function Register() {
             <form onSubmit={submit} className="form">
                 <div className="form-group">
                     <label>Username</label>
-                    <input type="text" placeholder="Username" ref={usernameRef} className="form-control" />
+                    <input type="text" placeholder="Username" ref={usernameRef} className="form-control" required/>
                 </div>
                 <div className="form-group">
                     <label>E-Mail</label>
-                    <input type="email" placeholder="E-Mail" ref={emailRef} className="form-control" />
+                    <input type="email" placeholder="E-Mail" ref={emailRef} className="form-control" required/>
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" placeholder="Password" ref={passwordRef} className="form-control" />
+                    <input type="password" placeholder="Password" ref={passwordRef} className="form-control" required/>
                 </div>
                 <button type="submit" className="main-button">Sign Up</button>
             </form>

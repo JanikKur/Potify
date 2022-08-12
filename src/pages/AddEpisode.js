@@ -34,19 +34,19 @@ export default function AddEpisode() {
             <form onSubmit={submit} className="add-podcast-form">
                 <div className="form-group">
                     <label>Podcast</label>
-                    <select ref={podcastRef} defaultValue={defaultPodcast} className="form-control selection">
+                    <select ref={podcastRef} required defaultValue={defaultPodcast} className="form-control selection">
                         {podcasts.map(podcast => <option selected={defaultPodcast === podcast._id} value={podcast._id}>{podcast.title}</option>)}
                     </select>
                 </div>
 
                 <div className="form-group">
                     <label>Title</label>
-                    <input type="text" ref={titleRef} placeholder="Title" className="form-control" />
+                    <input type="text" ref={titleRef} placeholder="Title" className="form-control" required/>
                 </div>
 
                 <div className="form-group">
                     <label>File</label>
-                    <input ref={fileRef} type="file" />
+                    <input ref={fileRef} type="file" required/>
                 </div>
                 <button className="main-button" type="submit">Add Episode</button>
             </form>

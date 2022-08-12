@@ -20,11 +20,11 @@ export default function Login() {
             <form onSubmit={submit} className="form">
                 <div className="form-group">
                     <label>E-Mail</label>
-                    <input type="email" ref={emailRef} placeholder="E-Mail" className="form-control" />
+                    <input type="email" ref={emailRef} placeholder="E-Mail" className="form-control" required/>
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" ref={passwordRef} placeholder="Password" className="form-control" />
+                    <input type="password" ref={passwordRef} placeholder="Password" className="form-control" required/>
                 </div>
                 <button type="submit" className="main-button">Log In</button>
             </form>

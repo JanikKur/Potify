@@ -24,11 +24,11 @@ export default function Settings() {
             <form onSubmit={submit} className="settings">
                 <div className="form-group">
                     <label>Username</label>
-                    <input type="text" placeholder="Username" ref={userNameRef} defaultValue={currentUser.username} className="form-control" />
+                    <input type="text" placeholder="Username" ref={userNameRef} defaultValue={currentUser.username} className="form-control" required/>
                 </div>
                 <div className="form-group">
                     <label>E-Mail</label>
-                    <input type="email" placeholder="E-Mail" ref={emailRef} defaultValue={currentUser.email} className="form-control" />
+                    <input type="email" placeholder="E-Mail" ref={emailRef} defaultValue={currentUser.email} className="form-control" required/>
                 </div>
                 <details className="new-password-wrapper">
                     <summary>New Password</summary>

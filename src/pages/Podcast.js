@@ -13,7 +13,7 @@ export default function Podcast() {
 
     const [podcast, setPodcast] = useState(null);
 
-    const {currentEpisode, updateEpisode, currentTitle, setCurrentTitle} = useEpisode();
+    const {currentEpisode, updateEpisode, setCurrentTitle} = useEpisode();
     const {currentUser, toggleSubscription, isSubscribed} = useUser();
 
     useEffect(() => {
