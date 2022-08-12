@@ -40,3 +40,7 @@ export async function addEpisode(podcastId, title, file){
     formData.append('file', file);
     return axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/addEpisode/${podcastId}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
 }
+
+export async function deletePodcast(podcastId){
+    return axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/${podcastId}`, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+}

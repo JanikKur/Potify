@@ -128,7 +128,6 @@ const addPodcast = async (req, res) => {
 }
 
 const deletePodcast = async (req, res) => {
-    if(req.params.id !== req.user._id) return res.sendStatus(401);
     try {
         const podcast = await Podcast.deleteOne({ _id: req.params.id });
         res.status(201).json({ podcast });

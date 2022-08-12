@@ -4,15 +4,16 @@ import {BiHeart,BiAddToQueue} from 'react-icons/bi';
 import {BsFillHeartFill} from 'react-icons/bs';
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import Episode from '../components/Episode';
-import { Link } from 'react-router-dom';
-import { getPodcastById } from '../services/podcast';
+import { Link, useNavigate } from 'react-router-dom';
+import { deletePodcast, getPodcastById } from '../services/podcast';
 import {useUser} from '../contexts/UserContext';
 import {useEpisode} from '../contexts/EpisodeContext';
 
 export default function Podcast() {
 
-    const [podcast, setPodcast] = useState(null);
+    const navigate = useNavigate();
 
+    const [podcast, setPodcast] = useState(null);
     const {currentEpisode, updateEpisode, setCurrentTitle} = useEpisode();
     const {currentUser, toggleSubscription, isSubscribed} = useUser();
 
@@ -22,6 +23,14 @@ export default function Podcast() {
             setPodcast(res.data.podcast);
         })
     },[]);
+
+
+    async function deletePodcast(){
+        if(window.confirm("Are you shure to delete this Podcast?")){
+            await deletePodcast(podcast._id);
+            navigate('/');
+        }
+    }
 
 
     if(!podcast || !currentEpisode) return null;
@@ -35,7 +44,7 @@ export default function Podcast() {
                 <div className="podcast-controls">
                     {currentUser && <button className="icon-button" onClick={() => toggleSubscription(podcast._id)}>{isSubscribed(podcast._id) ? <BsFillHeartFill className="subscribed"/> : <BiHeart/>}</button>}
                     {currentUser && currentUser._id ===  podcast.author && <Link to={`/addepisode?id=${podcast._id}`} className="icon-link"><BiAddToQueue/></Link>}
-                    {currentUser && currentUser._id ===  podcast.author && <button className="icon-button"><RiDeleteBin6Line/></button>}
+                    {currentUser && currentUser._id ===  podcast.author && <button className="icon-button" onClick={deletePodcast}><RiDeleteBin6Line/></button>}
                 </div>
             </div>
             <div className="episodes-list">
