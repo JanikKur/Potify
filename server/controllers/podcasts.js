@@ -6,10 +6,10 @@ const getAllPodcasts = async (req, res) => {
     try {
         let podcasts;
         if(req.query.sort === 'trends'){
-            podcasts = await Podcast.find({}, {},{sort: {clicks: -1}});
+            podcasts = await Podcast.find({}, {},{sort: {clicks: -1}}).skip(req.skipIndex).limit(req.limit);
         } 
         else{
-            podcasts = await Podcast.find({}, {},{sort: {date: -1}});
+            podcasts = await Podcast.find({}, {},{sort: {date: -1}}).skip(req.skipIndex).limit(req.limit);
         }  
         res.status(200).json({ podcasts });
     }

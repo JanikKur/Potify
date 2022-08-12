@@ -1,12 +1,13 @@
 const express = require('express');
 const { getAllPodcasts, getPodcast, getPodcastByIds, getPodcastsByAuthor, getPodcastsByTitle, playPodcast, updatePodcast, addPodcast, deletePodcast, addEpisode } = require('../controllers/podcasts');
+const pagination = require('../utils/pagination');
 const saveFile = require('../utils/saveFile');
 const validateUserToken = require('../utils/validateUserToken');
 
 const router = express.Router();
 
 //Get all podcasts
-router.get('/', getAllPodcasts);
+router.get('/', pagination, getAllPodcasts);
 
 //Get all podcasts from author
 router.get('/author/:id', getPodcastsByAuthor);
