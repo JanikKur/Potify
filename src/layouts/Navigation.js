@@ -17,7 +17,7 @@ export default function Navigation() {
                 <Link to="/" className="logo-link">Potify</Link>
             </div>
             <div onClick={() => setShowMenu(false)} className={`nav-links ${!showMenu ? 'collapse' : ''}`}>
-                {currentUser && <Link to="/search" className="nav-link">Podcasts</Link>}
+                <Link to="/search" className="nav-link">Podcasts</Link>
                 {currentUser && <Link to="/favorites" className="nav-link">Favorites</Link>}
                 {currentUser && <Link to="/mypodcasts" className="nav-link">My Podcasts</Link>}
                 {currentUser && <Link to="/addpodcast" className="nav-link">Add Podcast</Link>}
