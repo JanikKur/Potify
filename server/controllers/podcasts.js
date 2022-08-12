@@ -31,7 +31,7 @@ const getPodcast = async (req, res) => {
 const getPodcastByIds = async (req, res) => {
     try {
         const ids = JSON.parse(req.params.ids);
-        const podcasts = await Podcast.find({_id: {$in: ids}});
+        const podcasts = await Podcast.find({_id: {$in: ids}}).skip(req.skipIndex).limit(req.limit);
         res.status(200).json({ podcasts });
     }
     catch (err) {
@@ -42,7 +42,7 @@ const getPodcastByIds = async (req, res) => {
 
 const getPodcastsByAuthor = async (req, res) => {
     try {
-        const podcasts = await Podcast.find({ author: req.params.id });
+        const podcasts = await Podcast.find({ author: req.params.id }).skip(req.skipIndex).limit(req.limit);
         res.status(200).json({ podcasts });
     }
     catch (err) {
@@ -52,7 +52,7 @@ const getPodcastsByAuthor = async (req, res) => {
 
 const getPodcastsByTitle = async (req, res) => {
     try {
-        const podcasts = await Podcast.find({ title: req.params.title });
+        const podcasts = await Podcast.find({ title: req.params.title }).skip(req.skipIndex).limit(req.limit);
         res.status(200).json({ podcasts });
     }
     catch (err) {

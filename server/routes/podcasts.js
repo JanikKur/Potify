@@ -10,16 +10,16 @@ const router = express.Router();
 router.get('/', pagination, getAllPodcasts);
 
 //Get all podcasts from author
-router.get('/author/:id', getPodcastsByAuthor);
+router.get('/author/:id', pagination, getPodcastsByAuthor);
 
 //Get a Podcast by its author
-router.get('/title/:title', getPodcastsByTitle);
+router.get('/title/:title', pagination, getPodcastsByTitle);
 
 //Get a specific podcast
 router.get('/id/:id', getPodcast);
 
 //Get a specific podcast
-router.get('/ids/:ids', getPodcastByIds);
+router.get('/ids/:ids', pagination, getPodcastByIds);
 
 //Play a specific episode
 router.get('/play/:file', playPodcast);
