@@ -4,7 +4,13 @@ const path = require('path');
 
 const getAllPodcasts = async (req, res) => {
     try {
-        const podcasts = await Podcast.find();
+        let podcasts;
+        if(req.query.sort === 'trends'){
+            podcasts = await Podcast.find({}, {},{sort: {clicks: -1}});
+        } 
+        else{
+            podcasts = await Podcast.find({}, {},{sort: {date: -1}});
+        }  
         res.status(200).json({ podcasts });
     }
     catch (err) {
