@@ -14,7 +14,7 @@ const getAllPodcasts = async (req, res) => {
 
 const getPodcast = async (req, res) => {
     try {
-        const podcast = await Podcast.findOne({ _id: req.params.id });
+        const podcast = await Podcast.findOneAndUpdate({ _id: req.params.id }, { $inc: {clicks: 1} });
         res.status(200).json({ podcast });
     }
     catch (err) {
