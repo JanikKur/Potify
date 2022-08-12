@@ -3,6 +3,7 @@ import '../assets/styles/layouts/sliderSelection.css';
 import PodcastSlider from '../components/PodcastSlider';
 import { getPodcastByIds } from '../services/podcast';
 import {useUser} from '../contexts/UserContext';
+import { Link } from 'react-router-dom';
 
 export default function SubscribedPodcastSlider() {
 
@@ -21,7 +22,10 @@ export default function SubscribedPodcastSlider() {
     if(!currentUser) return null;
     return (
         <div className="slider-section">
-            <p>Subscribed Podcasts</p>
+            <div className='informations'>
+                <p>Subscribed Podcasts</p>
+                <Link to='/favorites' className='all-link'>view all</Link>
+            </div>
             <PodcastSlider podcasts={podcasts}/>
         </div>
     )

@@ -2,3 +2,15 @@
 .slider-section p{
     margin: 0;
 }
+
+.slider-section .informations{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.all-link{
+    color: rgb(82, 80, 80);
+    text-decoration: underline;
+}
