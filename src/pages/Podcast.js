@@ -5,7 +5,7 @@ import {BsFillHeartFill} from 'react-icons/bs';
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import Episode from '../components/Episode';
 import { Link, useNavigate } from 'react-router-dom';
-import { deletePodcast, getPodcastById } from '../services/podcast';
+import { deletePodcast as deletePodcastService, getPodcastById } from '../services/podcast';
 import {useUser} from '../contexts/UserContext';
 import {useEpisode} from '../contexts/EpisodeContext';
 
@@ -27,8 +27,8 @@ export default function Podcast() {
 
     async function deletePodcast(){
         if(window.confirm("Are you shure to delete this Podcast?")){
-            await deletePodcast(podcast._id);
-            navigate('/');
+            await deletePodcastService(podcast._id);
+            navigate('/', { replace: true });
         }
     }
 
