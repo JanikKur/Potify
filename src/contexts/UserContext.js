@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { remove } from '../utils/removeElement';
+import { logoutUser, validateUser, loginUser as loginUserService, registerUser as registerUserService, updateUser, subscribePodcast as subscribePodcastService, unsubscribePodcast as unsubscribePodcastService } from '../services/user';
 const UserContext = React.createContext();
-const backendLink = process.env.REACT_APP_BACKEND_URL + '/api/v1';
 
 export function useUser() {
     return useContext(UserContext);
@@ -23,16 +22,16 @@ export function UserProvider({ children }) {
 
 
     useEffect(() => {
-        axios.get(`${backendLink}/user/validate`, {}, { withCredentials: true }).then(res => {
+        validateUser().then(res => {
             setCurrentUser(res.data.user);
-        }).catch(error => {
-        })
+        }).catch(err => {});
     }, []);
 
     async function logout() {
         try {
-            await axios.delete(`${backendLink}/user/logout`, { withCredentials: true });
-            window.location.reload();
+            await logoutUser();
+            setCurrentUser(null);
+            navigate('/');
         }
         catch (error) {
             console.log(error);
@@ -43,11 +42,8 @@ export function UserProvider({ children }) {
         if (!email || !password) {
             return;
         }
-        let formData = new URLSearchParams();
-        formData.append('username', email);
-        formData.append('password', password);
         try {
-            const result = await axios.post(`${backendLink}/user/login`, formData, { withCredentials: true });
+            const result = await loginUserService(email,password);
             if (result.status === 200) {
                 setCurrentUser(prev => {return {...result.data}});
                 navigate('/');
@@ -59,17 +55,13 @@ export function UserProvider({ children }) {
     }
 
     async function registerUser(username, email, password) {
-        if (!username || !password) {
+        if (!username || !email || !password) {
             return;
         }
-        let formData = new URLSearchParams();
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
         try {
-            const result = await axios.post(`${backendLink}/user`, formData, { withCredentials: true });
+            const result = await registerUserService(username, email, password);
             if (result.status === 201) {
-                window.location.href = '/login';
+                navigate('/login');
             }
         }
         catch (error) {
@@ -81,14 +73,11 @@ export function UserProvider({ children }) {
         if (!newData) {
             return;
         }
-        let formData = new FormData();
-        for (let elem in newData) {
-            formData.append(elem, newData[elem]);
-        }
         try {
-            const result = await axios.put(`${backendLink}/user/${currentUser._id}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+            const result = await updateUser(currentUser._id, newData);
             if (result.status === 200) {
-                window.location.reload();
+                setCurrentUser(prev => {return {...prev, ...newData}});
+                navigate('/settings');
             }
         }
         catch (error) {
@@ -98,7 +87,7 @@ export function UserProvider({ children }) {
 
     async function subscribePodcast(podcastId) {
         try{
-            await axios.put(`${backendLink}/user/subscribepodcast/${podcastId}`, { withCredentials: true });
+            await subscribePodcastService(podcastId);
             setCurrentUser(prev => {
                 if(!prev.subscriptions.includes(podcastId)) {
                     prev.subscriptions.push(podcastId);
@@ -113,7 +102,7 @@ export function UserProvider({ children }) {
 
     async function unsubscribePodcast(podcastId) {
         try{
-            await axios.put(`${backendLink}/user/unsubscribepodcast/${podcastId}`, { withCredentials: true });
+            await unsubscribePodcastService(podcastId);
             setCurrentUser(prev => {
                 prev.subscriptions = remove(prev.subscriptions, podcastId);
                 return {...prev};
