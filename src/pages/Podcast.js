@@ -34,8 +34,8 @@ export default function Podcast() {
                 <h4>{podcast.description}</h4>
                 <div className="podcast-controls">
                     {currentUser && <button className="icon-button" onClick={() => toggleSubscription(podcast._id)}>{isSubscribed(podcast._id) ? <BsFillHeartFill className="subscribed"/> : <BiHeart/>}</button>}
-                    <Link to={`/addepisode?id=${podcast._id}`} className="icon-link"><BiAddToQueue/></Link>
-                    <button className="icon-button"><RiDeleteBin6Line/></button>
+                    {currentUser && currentUser._id ===  podcast.author && <Link to={`/addepisode?id=${podcast._id}`} className="icon-link"><BiAddToQueue/></Link>}
+                    {currentUser && currentUser._id ===  podcast.author && <button className="icon-button"><RiDeleteBin6Line/></button>}
                 </div>
             </div>
             <div className="episodes-list">

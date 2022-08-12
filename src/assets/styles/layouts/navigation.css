@@ -93,6 +93,18 @@
     display: flex;
 }
 
+.logout-button{
+    background-color: red;
+    border: none;
+    height: 100%;
+    font-size: 100%;
+    color: white;
+    font-weight: 600;
+    padding: .5rem 1rem;
+    margin: auto;
+    border-radius: 22px;
+}
+
 @media only screen and (max-width: 600px) {
     .menu-button{
         display: initial;

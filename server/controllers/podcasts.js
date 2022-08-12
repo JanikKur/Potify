@@ -113,7 +113,7 @@ const addEpisode = async (req, res) => {
 
 const addPodcast = async (req, res) => {
     try {
-        const podcast = await Podcast.create({...req.body, author: req.user._id});
+        const podcast = await Podcast.create({...req.body, author: req.user._id, date: new Date().getTime()});
         res.status(201).json({ podcast });
     }
     catch (err) {

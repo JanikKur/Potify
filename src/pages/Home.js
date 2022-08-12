@@ -6,16 +6,20 @@ import { FiSettings } from 'react-icons/fi';
 import MainLink from '../components/MainLink';
 import { useNavigate } from 'react-router-dom';
 import SubscribedPodcastSlider from '../layouts/SubscribedPodcastSlider';
+import {useUser} from '../contexts/UserContext';
+import NewPodcastSlider from '../layouts/NewPodcastSlider';
 
 export default function Home() {
 
+  
+  const {currentUser} = useUser();
   let navigate = useNavigate();
   let submit = title => {
     navigate(`/search?q=${title}`);
   }
 
   return (
-    <main>
+    <main className="home">
       <SearchBar onSubmit={submit} />
       <div className="main-links-wrapper">
         <MainLink icon={<BiMicrophone />} text="My Podcasts" href="/mypodcasts" />
@@ -23,7 +27,8 @@ export default function Home() {
         <MainLink icon={<BiTrendingUp />} text="Trends" href="/" />
         <MainLink icon={<FiSettings />} text="Settings" href="/settings" />
       </div>
-      <SubscribedPodcastSlider/>
+      {currentUser && <SubscribedPodcastSlider/>}
+      <NewPodcastSlider/>
     </main>
   )
 }

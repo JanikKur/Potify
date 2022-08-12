@@ -8,7 +8,7 @@ import {useUser} from '../contexts/UserContext';
 export default function Navigation() {
 
     const [showMenu, setShowMenu] = useState(false);
-    const {currentUser} = useUser();
+    const {currentUser, logout} = useUser();
 
     return (
         <nav className="navigation">
@@ -21,6 +21,7 @@ export default function Navigation() {
                 <Link to="/favorites" className="nav-link">Favorites</Link>
                 <Link to="/mypodcasts" className="nav-link">My Podcasts</Link>
                 <Link to="/addpodcast" className="nav-link">Add Podcast</Link>
+                {currentUser && <button className="logout-button" onClick={logout}>Logout</button>}
             </div>
             <div className="right">
                     <button className="search-button"><AiOutlineSearch/></button>

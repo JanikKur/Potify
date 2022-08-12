@@ -19,7 +19,7 @@ export default function Favorites() {
     if(!currentUser) return null;
     return (
         <main className="search">
-            <h2>Search for Podcasts</h2>
+            <h2>Favorites</h2>
             <div className="podcast-list">
                 {podcasts.length ? podcasts.map(podcast => <PodcastItem key={podcast._id} data={podcast} />) : 'No Podcasts Found'}
             </div>

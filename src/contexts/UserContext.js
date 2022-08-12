@@ -49,7 +49,7 @@ export function UserProvider({ children }) {
         try {
             const result = await axios.post(`${backendLink}/user/login`, formData, { withCredentials: true });
             if (result.status === 200) {
-                setCurrentUser(result.data.user);
+                setCurrentUser(prev => {return {...result.data}});
                 navigate('/');
             }
         }

@@ -22,6 +22,14 @@ const PodcastSchema = new mongoose.Schema({
     episodes: {
         type: Array,
         default: []
+    },
+    genre: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Number,
+        required: true
     }
 });
 
