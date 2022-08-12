@@ -17,10 +17,10 @@ export default function Navigation() {
                 <Link to="/" className="logo-link">Potify</Link>
             </div>
             <div onClick={() => setShowMenu(false)} className={`nav-links ${!showMenu ? 'collapse' : ''}`}>
-                <Link to="/search" className="nav-link">Podcasts</Link>
-                <Link to="/favorites" className="nav-link">Favorites</Link>
-                <Link to="/mypodcasts" className="nav-link">My Podcasts</Link>
-                <Link to="/addpodcast" className="nav-link">Add Podcast</Link>
+                {currentUser && <Link to="/search" className="nav-link">Podcasts</Link>}
+                {currentUser && <Link to="/favorites" className="nav-link">Favorites</Link>}
+                {currentUser && <Link to="/mypodcasts" className="nav-link">My Podcasts</Link>}
+                {currentUser && <Link to="/addpodcast" className="nav-link">Add Podcast</Link>}
                 {currentUser && <button className="logout-button" onClick={logout}>Logout</button>}
             </div>
             <div className="right">
