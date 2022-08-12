@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import SubscribedPodcastSlider from '../layouts/SubscribedPodcastSlider';
 import {useUser} from '../contexts/UserContext';
 import NewPodcastSlider from '../layouts/NewPodcastSlider';
+import TrendingPodcastSlider from '../layouts/TrendingPodcastSlider';
 
 export default function Home() {
 
@@ -25,10 +26,11 @@ export default function Home() {
       <div className="main-links-wrapper">
         <MainLink icon={<BiMicrophone />} text="My Podcasts" href="/mypodcasts" />
         <MainLink icon={<BiHeart />} text="Favorites" href="/favorites" />
-        <MainLink icon={<BiTrendingUp />} text="Trends" href="/" />
+        <MainLink icon={<BiTrendingUp />} text="Trends" href="/trends" />
         <MainLink icon={<FiSettings />} text="Settings" href="/settings" />
       </div>
       {currentUser && <SubscribedPodcastSlider/>}
+      <TrendingPodcastSlider/>
       <NewPodcastSlider/>
     </main>
   )

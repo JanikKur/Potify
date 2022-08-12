@@ -11,6 +11,7 @@ import Podcast from '../pages/Podcast'
 import Register from '../pages/Register'
 import Search from '../pages/Search'
 import Settings from '../pages/Settings'
+import Trends from '../pages/Trends'
 import { useUser } from '../contexts/UserContext'
 
 export default function RoutesComp() {
@@ -22,6 +23,7 @@ export default function RoutesComp() {
       <Route path="/" element={<Home />} />
       <Route path="/search" element={<Search />} />
       <Route path="/podcast" element={<Podcast />} />
+      <Route path="/trends" element={<Trends />} />
       {currentUser && <Route path="/settings" element={<Settings />} />}
       {currentUser && <Route path="/mypodcasts" element={<MyPodcasts />} />}
       {currentUser && <Route path="/addpodcast" element={<AddPodcast />} />}

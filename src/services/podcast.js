@@ -4,6 +4,11 @@ export async function getAllPodcasts(){
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/`);
 }
 
+
+export async function getTrendingPodcasts(){
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast?sort=trends`);
+}
+
 export async function getPodcastById(id){
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/id/${id}`);
 }
