@@ -14,6 +14,7 @@ export default function Home() {
   
   const {currentUser} = useUser();
   let navigate = useNavigate();
+  
   let submit = title => {
     navigate(`/search?q=${title}`);
   }
