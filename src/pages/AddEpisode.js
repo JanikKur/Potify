@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useUser } from '../contexts/UserContext';
 import { addEpisode, getPodcastByAuthor } from '../services/podcast';
+import Loading from '../components/Loading';
 
 export default function AddEpisode() {
 
@@ -11,6 +12,7 @@ export default function AddEpisode() {
     const titleRef = useRef();
     const fileRef = useRef();
     const [defaultPodcast, setDefaultPodcast] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if(currentUser){
@@ -22,16 +24,18 @@ export default function AddEpisode() {
     },[currentUser]);
 
 
-    function submit(e){
+    async function submit(e){
         e.preventDefault();
-        addEpisode(podcastRef.current.value, titleRef.current.value, fileRef.current.files[0]);
+        setIsLoading(true);
+        await addEpisode(podcastRef.current.value, titleRef.current.value, fileRef.current.files[0]);
+        setIsLoading(false);
     }
 
     if(!currentUser) return null;
     return (
         <main>
             <h2>Add Episode</h2>
-            <form onSubmit={submit} className="add-podcast-form">
+            <form onSubmit={e => !isLoading && submit(e)} className="add-podcast-form">
                 <div className="form-group">
                     <label>Podcast</label>
                     <select ref={podcastRef} required defaultValue={defaultPodcast} className="form-control selection">
@@ -48,7 +52,7 @@ export default function AddEpisode() {
                     <label>File</label>
                     <input ref={fileRef} type="file" required/>
                 </div>
-                <button className="main-button" type="submit">Add Episode</button>
+                <button disabled={isLoading} className="main-button" type="submit">{isLoading ? <Loading/> : 'Add Episode'}</button>
             </form>
         </main>
     )

@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import '../assets/styles/pages/addPodcast.css';
 import { addPodcast } from '../services/podcast';
+import Loading from '../components/Loading';
 
 export default function AddPodcast() {
     
@@ -8,16 +9,19 @@ export default function AddPodcast() {
     const descriptionRef = useRef();
     const genreRef = useRef();
     const imageRef = useRef();
+    const [isLoading, setIsLoading] = useState(false);
 
-    function submit(e){
+    async function submit(e){
         e.preventDefault();
-        addPodcast(titleRef.current.value, descriptionRef.current.value, genreRef.current.value, imageRef.current.files[0]);
+        setIsLoading(true);
+        await addPodcast(titleRef.current.value, descriptionRef.current.value, genreRef.current.value, imageRef.current.files[0]);
+        setIsLoading(false);
     }
 
     return (
         <main>
             <h2>Add Podcast</h2>
-            <form onSubmit={submit} className="add-podcast-form">
+            <form onSubmit={e => !isLoading && submit(e)} className="add-podcast-form">
 
                 <div className="form-group">
                     <label>Title Image</label>
@@ -38,7 +42,7 @@ export default function AddPodcast() {
                     <label>Genre</label>
                     <input type="text" placeholder="Genre" ref={genreRef} className="form-control" required/>
                 </div>
-                <button className="main-button" type="submit">Add Podcast</button>
+                <button disabled={isLoading} className="main-button" type="submit">{isLoading ? <Loading/> : 'Add Podcast'}</button>
             </form>
         </main>
     )

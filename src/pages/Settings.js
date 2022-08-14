@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import '../assets/styles/pages/settings.css';
 import {useUser} from '../contexts/UserContext';
+import Loading from '../components/Loading';
 
 export default function Settings() {
 
@@ -8,10 +9,13 @@ export default function Settings() {
     const {currentUser, updateUserData} = useUser();
     const userNameRef = useRef();
     const emailRef = useRef();
+    const [isLoading, setIsLoading] = useState(false);
 
-    function submit(e){
+    async function submit(e){
         e.preventDefault();
-        updateUserData({username: userNameRef.current.value, email: emailRef.current.value});
+        setIsLoading(true)
+        await updateUserData({username: userNameRef.current.value, email: emailRef.current.value});
+        setIsLoading(false)
     }
 
     if(!currentUser) return null;
@@ -21,7 +25,7 @@ export default function Settings() {
                 <h1 className="name-icon">{currentUser.username[0].toUpperCase()}</h1>
                 <h1 className="name">{currentUser.username}</h1>
             </div>
-            <form onSubmit={submit} className="settings">
+            <form onSubmit={e => !isLoading && submit(e)} className="settings">
                 <div className="form-group">
                     <label>Username</label>
                     <input type="text" placeholder="Username" ref={userNameRef} defaultValue={currentUser.username} className="form-control" required/>
@@ -43,7 +47,7 @@ export default function Settings() {
                         </div>
                     </div>
                 </details>
-                <button className="main-button">Save</button>
+                <button disabled={isLoading} className="main-button">{isLoading ? <Loading/> : 'Save'}</button>
                 <button className="delete-button">Delete Account</button>
             </form>
         </main>
