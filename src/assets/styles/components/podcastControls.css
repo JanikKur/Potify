@@ -110,6 +110,12 @@
     left: 10px;
 }
 
+@supports (-webkit-touch-callout: none) {
+    .volume-controls{
+        display: none;
+    }
+}  
+
 .volume-slider{
     position: absolute;
     top: 0;

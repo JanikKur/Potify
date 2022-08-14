@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import '../assets/styles/layouts/sliderSelection.css';
+import Loading from '../components/Loading';
 import PodcastSlider from '../components/PodcastSlider';
 import { getAllPodcasts } from '../services/podcast';
 
@@ -8,10 +9,12 @@ export default function NewPodcastSlider() {
 
 
     const [podcasts, setPodcasts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getAllPodcasts().then(res => {
             setPodcasts(res.data.podcasts);
+            setIsLoading(false);
         });
     }, []);
 
@@ -21,7 +24,7 @@ export default function NewPodcastSlider() {
                 <p>New Podcasts</p>
                 <Link to='/search' className='all-link'>view all</Link>
             </div>
-            <PodcastSlider podcasts={podcasts}/>
+            {isLoading ? <Loading/> : <PodcastSlider podcasts={podcasts}/>}
         </div>
     )
 }

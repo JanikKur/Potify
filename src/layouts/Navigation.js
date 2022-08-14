@@ -38,7 +38,7 @@ export default function Navigation() {
                         <form className={`navigation-search-form ${showSearch ? 'show' : ''}`} onSubmit={submit}>
                             <input type="text" className='navigation-search-input' ref={searchRef} />
                         </form>
-                        <button className="search-button" onClick={() => {setShowSearch(!showSearch); searchRef.current.focus()}}><AiOutlineSearch/></button>
+                        <button className="search-button" onClick={() => {setShowSearch(!showSearch)}}><AiOutlineSearch/></button>
                     </div>
                     {currentUser ? <UserIcon name={currentUser.username[0].toUpperCase()} /> : <div><Link to="/login" className="nav-link">Log In</Link>/<Link to="/register" className="nav-link">Sign Up</Link></div>}
             </div>
