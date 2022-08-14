@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { deletePodcast as deletePodcastService, getPodcastById } from '../services/podcast';
 import {useUser} from '../contexts/UserContext';
 import {useEpisode} from '../contexts/EpisodeContext';
+import Loading from '../components/Loading';
 
 export default function Podcast() {
 
@@ -16,11 +17,13 @@ export default function Podcast() {
     const [podcast, setPodcast] = useState(null);
     const {currentEpisode, updateEpisode, setCurrentTitle} = useEpisode();
     const {currentUser, toggleSubscription, isSubscribed} = useUser();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const id = new URLSearchParams(window.location.search).get('id');
         getPodcastById(id !== "undefined" ? id : '62f38940662a95ffecfa96e7').then(res => { //TODO
             setPodcast(res.data.podcast);
+            setIsLoading(false);
         })
     },[]);
 
@@ -32,7 +35,7 @@ export default function Podcast() {
         }
     }
 
-
+    if(isLoading) return <main><Loading/></main>
     if(!podcast || !currentEpisode) return null;
     return (
         <>

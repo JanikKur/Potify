@@ -22,7 +22,7 @@ export default function SubscribedPodcastSlider() {
         }
     }, [currentUser]);
 
-    if(!currentUser) return null;
+    if(!currentUser || !podcasts?.length) return null;
     return (
         <div className="slider-section">
             <div className='informations'>

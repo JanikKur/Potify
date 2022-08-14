@@ -18,7 +18,7 @@ export default function PodcastSlider({podcasts}) {
     slidesToScroll: 2
   };
 
-  if (!podcasts) return  'No Podcasts';
+  if (!podcasts?.length) return  'No Podcasts';
   return (
     <Slider {...settings}>
       {podcasts.map((podcast, idx) =><PodcastItem key={podcast._id} data={podcast} />)}
