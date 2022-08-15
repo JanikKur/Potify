@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useRef } from 'react';
 import {useUser} from '../contexts/UserContext';
 import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 export default function Login() {
 
@@ -10,17 +11,23 @@ export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState(null);
 
     async function submit(e){
         e.preventDefault();
         setIsLoading(true);
-        await loginUser(emailRef.current.value, passwordRef.current.value);
+        try{
+            await loginUser(emailRef.current.value, passwordRef.current.value);
+        }catch(err){
+            setMessage(<Message message='Could not login, please try again' />)
+        }
         setIsLoading(false);
     }
 
     return (
         <main>
             <h2>Log In</h2>
+            {message}
             <form onSubmit={e => !isLoading && submit(e)} className="form">
                 <div className="form-group">
                     <label>E-Mail</label>

@@ -11,7 +11,6 @@ import NewPodcastSlider from '../layouts/NewPodcastSlider';
 import TrendingPodcastSlider from '../layouts/TrendingPodcastSlider';
 
 export default function Home() {
-
   
   const {currentUser} = useUser();
   let navigate = useNavigate();

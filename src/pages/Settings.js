@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import '../assets/styles/pages/settings.css';
 import {useUser} from '../contexts/UserContext';
 import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 export default function Settings() {
 
@@ -10,14 +11,16 @@ export default function Settings() {
     const userNameRef = useRef();
     const emailRef = useRef();
     const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState(null);
 
     async function submit(e){
         e.preventDefault();
         setIsLoading(true)
         try{
             await updateUserData({username: userNameRef.current.value, email: emailRef.current.value});
+            setMessage(<Message message='Updated successfully' />);
         }catch(err){
-            
+            setMessage(<Message message='Could not update, please try again' />);
         }
         setIsLoading(false)
     }
@@ -25,6 +28,7 @@ export default function Settings() {
     if(!currentUser) return null;
     return (
         <main>
+            {message}
             <div className="user-informations">
                 <h1 className="name-icon">{currentUser.username[0].toUpperCase()}</h1>
                 <h1 className="name">{currentUser.username}</h1>

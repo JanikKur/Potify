@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import '../assets/styles/pages/addPodcast.css';
 import { addPodcast } from '../services/podcast';
 import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 export default function AddPodcast() {
     
@@ -10,14 +11,16 @@ export default function AddPodcast() {
     const genreRef = useRef();
     const imageRef = useRef();
     const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState();
 
     async function submit(e){
         e.preventDefault();
         setIsLoading(true);
         try{
             await addPodcast(titleRef.current.value, descriptionRef.current.value, genreRef.current.value, imageRef.current.files[0]);
+            setMessage(<Message message='Podcast added successfully' />);
         }catch(err){
-            
+            setMessage(<Message message='Could not add Podcast, please try again' />);
         }
         setIsLoading(false);
     }
@@ -25,6 +28,7 @@ export default function AddPodcast() {
     return (
         <main>
             <h2>Add Podcast</h2>
+            {message}
             <form onSubmit={e => !isLoading && submit(e)} className="add-podcast-form">
 
                 <div className="form-group">

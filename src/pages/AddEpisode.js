@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useUser } from '../contexts/UserContext';
 import { addEpisode, getPodcastByAuthor } from '../services/podcast';
 import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 export default function AddEpisode() {
 
@@ -13,6 +14,7 @@ export default function AddEpisode() {
     const fileRef = useRef();
     const [defaultPodcast, setDefaultPodcast] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState(null);
 
     useEffect(() => {
         if(currentUser){
@@ -29,8 +31,9 @@ export default function AddEpisode() {
         setIsLoading(true);
         try{
             await addEpisode(podcastRef.current.value, titleRef.current.value, fileRef.current.files[0]);
+            setMessage(<Message message={'Episode added successfully'} />);
         }catch(err){
-
+            setMessage(<Message message={'Could not add Episode, please try again'} />);
         }
         setIsLoading(false);
     }
@@ -39,6 +42,7 @@ export default function AddEpisode() {
     return (
         <main>
             <h2>Add Episode</h2>
+            {message}
             <form onSubmit={e => !isLoading && submit(e)} className="add-podcast-form">
                 <div className="form-group">
                     <label>Podcast</label>
