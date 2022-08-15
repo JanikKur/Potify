@@ -35,7 +35,7 @@
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/index.js",
     "startServer": "nodemon server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
