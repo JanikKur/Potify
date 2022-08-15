@@ -3,7 +3,7 @@ import { useUser } from '../contexts/UserContext';
 import { addEpisode, getPodcastByAuthor } from '../services/podcast';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
-import {checkPodcastFile} from '../utils/checkPodcastFile';
+import {isPodcastFile} from '../utils/checkPodcastFile';
 
 export default function AddEpisode() {
 
@@ -31,7 +31,7 @@ export default function AddEpisode() {
         e.preventDefault();
         setIsLoading(true);
         try{
-            if(!checkPodcastFile(fileRef.current.files[0])) throw new Error();
+            if(!isPodcastFile(fileRef.current.files[0])) throw new Error();
             await addEpisode(podcastRef.current.value, titleRef.current.value, fileRef.current.files[0]);
             setMessage(<Message message={'Episode added successfully'} />);
         }catch(err){

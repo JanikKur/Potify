@@ -3,6 +3,7 @@ import '../assets/styles/pages/addPodcast.css';
 import { addPodcast } from '../services/podcast';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
+import { isImageFile } from '../utils/checkPodcastFile';
 
 export default function AddPodcast() {
     
@@ -17,6 +18,7 @@ export default function AddPodcast() {
         e.preventDefault();
         setIsLoading(true);
         try{
+            if(!isImageFile(imageRef.current.files[0])) throw new Error();
             await addPodcast(titleRef.current.value, descriptionRef.current.value, genreRef.current.value, imageRef.current.files[0]);
             setMessage(<Message message='Podcast added successfully' />);
         }catch(err){
@@ -33,7 +35,7 @@ export default function AddPodcast() {
 
                 <div className="form-group">
                     <label>Title Image</label>
-                    <input type="file" ref={imageRef} required/>
+                    <input type="file" ref={imageRef} accept="image/*" required/>
                 </div>
 
                 <div className="form-group">
