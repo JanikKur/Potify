@@ -9,7 +9,7 @@ export default function Trends() {
     useEffect(() => {
         getTrendingPodcasts().then(res => {
             setPodcasts(res.data.podcasts);
-        })
+        }).catch(err => {});
     }, []);
 
 

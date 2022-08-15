@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PodcastItem from '../components/PodcastItem'
 import '../assets/styles/pages/myPodcasts.css';
 import { Link } from 'react-router-dom';
 import {useUser} from '../contexts/UserContext';
@@ -18,7 +17,7 @@ export default function MyPodcasts() {
       getPodcastByAuthor(currentUser._id).then(res => {
         setPodcasts(res.data.podcasts);
         setIsLoading(false);
-      })
+      }).catch(err => {});
     }
   },[currentUser]);
 

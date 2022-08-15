@@ -14,7 +14,11 @@ export default function Settings() {
     async function submit(e){
         e.preventDefault();
         setIsLoading(true)
-        await updateUserData({username: userNameRef.current.value, email: emailRef.current.value});
+        try{
+            await updateUserData({username: userNameRef.current.value, email: emailRef.current.value});
+        }catch(err){
+            
+        }
         setIsLoading(false)
     }
 

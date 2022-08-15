@@ -16,7 +16,7 @@ export default function Favorites() {
             getPodcastByIds(currentUser.subscriptions).then(res => {
                 setPodcasts(res.data.podcasts);
                 setIsLoading(false);
-            });
+            }).catch(err => {});
         }
     }, [currentUser]);
 

@@ -24,12 +24,12 @@ export default function Search() {
       getPodcastByTitle(title).then(res => {
         setPodcasts(res.data.podcasts);
         setIsLoading(false);
-      });
+      }).catch(err => {});
     } else {
       getAllPodcasts().then(res => {
         setPodcasts(res.data.podcasts);
         setIsLoading(false);
-      });
+      }).catch(err => {});
     }
   }, [title]);
 

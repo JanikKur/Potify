@@ -40,7 +40,7 @@ app.use(compression());
 
 /*--CORS--*/
 isDevelopment && app.use(cors({
-    origin: ['http://localhost:3000', 'http://192.168.2.100:3000'],
+    origin: ['http://localhost:3000', 'http://192.168.2.100:3000', 'http://172.20.10.2:3000'],
     credentials: true
 }));
 

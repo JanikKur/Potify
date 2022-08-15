@@ -14,7 +14,11 @@ export default function AddPodcast() {
     async function submit(e){
         e.preventDefault();
         setIsLoading(true);
-        await addPodcast(titleRef.current.value, descriptionRef.current.value, genreRef.current.value, imageRef.current.files[0]);
+        try{
+            await addPodcast(titleRef.current.value, descriptionRef.current.value, genreRef.current.value, imageRef.current.files[0]);
+        }catch(err){
+            
+        }
         setIsLoading(false);
     }
 
