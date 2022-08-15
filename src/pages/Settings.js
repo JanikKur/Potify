@@ -18,9 +18,9 @@ export default function Settings() {
         setIsLoading(true)
         try{
             await updateUserData({username: userNameRef.current.value, email: emailRef.current.value});
-            setMessage(<Message message='Updated successfully' />);
+            setMessage(prev => <Message message='Updated successfully' />);
         }catch(err){
-            setMessage(<Message message='Could not update, please try again' />);
+            setMessage(prev => <Message message='Could not update, please try again' />);
         }
         setIsLoading(false)
     }

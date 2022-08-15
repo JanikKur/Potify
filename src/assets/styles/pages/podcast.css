@@ -58,6 +58,7 @@
 .podcast-informations>h2,h4{
     font-weight: 100;
     margin: 0;
+    text-align: center;
 }
 
 
@@ -71,4 +72,5 @@
 
 .episodes-list h4{
     width: 100%;
+    text-align: left;
 }

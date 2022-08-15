@@ -3,6 +3,7 @@ import { useUser } from '../contexts/UserContext';
 import { addEpisode, getPodcastByAuthor } from '../services/podcast';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
+import {checkPodcastFile} from '../utils/checkPodcastFile';
 
 export default function AddEpisode() {
 
@@ -30,6 +31,7 @@ export default function AddEpisode() {
         e.preventDefault();
         setIsLoading(true);
         try{
+            if(!checkPodcastFile(fileRef.current.files[0])) throw new Error();
             await addEpisode(podcastRef.current.value, titleRef.current.value, fileRef.current.files[0]);
             setMessage(<Message message={'Episode added successfully'} />);
         }catch(err){
@@ -58,7 +60,7 @@ export default function AddEpisode() {
 
                 <div className="form-group">
                     <label>File</label>
-                    <input ref={fileRef} type="file" required/>
+                    <input ref={fileRef} type="file" accept=".mp3,audio/*" required/>
                 </div>
                 <button disabled={isLoading} className="main-button" type="submit">{isLoading ? <Loading/> : 'Add Episode'}</button>
             </form>

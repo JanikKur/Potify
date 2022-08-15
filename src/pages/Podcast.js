@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../assets/styles/pages/podcast.css';
-import {BiHeart,BiAddToQueue} from 'react-icons/bi';
+import {BiHeart,BiAddToQueue, BiEditAlt} from 'react-icons/bi';
 import {BsFillHeartFill} from 'react-icons/bs';
 import {RiDeleteBin6Line} from 'react-icons/ri';
 import Episode from '../components/Episode';
@@ -35,6 +35,10 @@ export default function Podcast() {
         }
     }
 
+    function editPodcast(){
+
+    }
+
     if(isLoading) return <main><Loading/></main>
     if(!podcast || !currentEpisode) return null;
     return (
@@ -47,6 +51,7 @@ export default function Podcast() {
                 <div className="podcast-controls">
                     {currentUser && <button className="icon-button" onClick={() => toggleSubscription(podcast._id)}>{isSubscribed(podcast._id) ? <BsFillHeartFill className="subscribed"/> : <BiHeart/>}</button>}
                     {currentUser && currentUser._id ===  podcast.author && <Link to={`/addepisode?id=${podcast._id}`} className="icon-link"><BiAddToQueue/></Link>}
+                    {currentUser && currentUser._id ===  podcast.author && <button className="icon-button" onClick={editPodcast}><BiEditAlt/></button>}
                     {currentUser && currentUser._id ===  podcast.author && <button className="icon-button" onClick={deletePodcast}><RiDeleteBin6Line/></button>}
                 </div>
             </div>

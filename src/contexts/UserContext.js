@@ -50,7 +50,7 @@ export function UserProvider({ children }) {
             }
         }
         catch (error) {
-            alert("Falscher Username oder Passwort")
+            throw new Error(error);
         }
     }
 
