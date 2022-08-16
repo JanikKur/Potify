@@ -27,7 +27,6 @@ export default function EpisodeSettings({setShowEpisodeSettings, setPodcast, epi
     }
 
     if(!episode) return null;
-    console.dir(episode);
     return (
         <aside className="episode-settings-wrapper">
             <form onSubmit={submit} className="episode-settings">

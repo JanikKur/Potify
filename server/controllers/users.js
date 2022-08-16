@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const { hashPassword } = require('../utils/hashPassword');
 const jwt = require('jsonwebtoken');
+const { comparePasswords } = require('../utils/comparePasswords');
 
 //Get all users
 const getAllUsers = async (req, res) => {
@@ -59,7 +60,22 @@ const validateUser = async (req, res) => {
 const updateUser = async (req, res) => {
     if(req.params.id !== req.user._id) return res.sendStatus(401);
     try {
-        const user = await User.updateOne({ _id: req.params.id }, { $set: req.body });
+        let user = null;
+        if(req.body.oldPassword && req.body.password){ //Update Password
+            const userPassword = await User.findOne({ _id: req.user._id}, {password: 1});
+            try{
+                await comparePasswords(req.body.oldPassword, userPassword.password);
+                const newPassword = await hashPassword(req.body.password);
+                user = await User.updateOne({ _id: req.params.id }, { $set: {...req.body, password: newPassword} });
+            }catch(err){
+                return res.status(400).json({ err });
+            }
+        }
+        else{
+            delete req.body.password;
+            user = await User.updateOne({ _id: req.params.id }, { $set: req.body });
+        }
+        
         res.status(200).json({ user });
     }
     catch (err) {
