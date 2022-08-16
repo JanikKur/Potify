@@ -58,7 +58,7 @@ const validateUser = async (req, res) => {
 
 //Update a User
 const updateUser = async (req, res) => {
-    if(req.params.id !== req.user._id) return res.sendStatus(401);
+    if(req.params.id !== req.user._id) return res.sendStatus(401); //Check if user to update is also logged in user
     try {
         let user = null;
         if(req.body.oldPassword && req.body.password){ //Update Password
@@ -127,7 +127,7 @@ const logout = async (req, res) => {
 
 //Delete a User
 const deleteUser = async (req, res) => {
-    if(req.params.id !== req.user._id) return res.sendStatus(401);
+    if(req.params.id !== req.user._id) return res.sendStatus(401); //Check if user to update is also logged in user
     try {
         const user = await User.deleteOne({ _id: req.params.id });
         res.status(201).json({ user });

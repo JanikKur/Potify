@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { remove } from '../utils/removeElement';
-import { logoutUser, validateUser, loginUser as loginUserService, registerUser as registerUserService, updateUser, subscribePodcast as subscribePodcastService, unsubscribePodcast as unsubscribePodcastService } from '../services/user';
+import { logoutUser, validateUser, loginUser as loginUserService, registerUser as registerUserService, updateUser, deleteUser as deleteUserService, subscribePodcast as subscribePodcastService, unsubscribePodcast as unsubscribePodcastService } from '../services/user';
 const UserContext = React.createContext();
 
 export function useUser() {
@@ -85,6 +85,18 @@ export function UserProvider({ children }) {
         }
     }
 
+    async function deleteUser(){
+        try{
+            const result = await deleteUserService(currentUser._id);
+            if (result.status === 200) {
+                await logout();
+                navigate('/');
+            }
+        }catch(err){
+            throw new Error(err);
+        }
+    }
+
     async function subscribePodcast(podcastId) {
         try{
             await subscribePodcastService(podcastId);
@@ -134,6 +146,7 @@ export function UserProvider({ children }) {
         loginUser,
         registerUser,
         updateUserData,
+        deleteUser,
         toggleSubscription,
         isSubscribed
     };

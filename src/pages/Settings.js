@@ -7,7 +7,7 @@ import Message from '../components/Message';
 export default function Settings() {
 
     
-    const {currentUser, updateUserData} = useUser();
+    const {currentUser, updateUserData, deleteUser} = useUser();
     const userNameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -57,8 +57,8 @@ export default function Settings() {
                         </div>
                     </div>
                 </details>
-                <button disabled={isLoading} className="main-button">{isLoading ? <Loading/> : 'Save'}</button>
-                <button className="delete-button">Delete Account</button>
+                <button disabled={isLoading} type='submit' className="main-button">{isLoading ? <Loading/> : 'Save'}</button>
+                <button className="delete-button" onClick={() => window.confirm('Do you really want to delete your Account') && deleteUser()}>Delete Account</button>
             </form>
         </main>
     )
