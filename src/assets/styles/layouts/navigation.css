@@ -82,7 +82,7 @@
     width: 0vw;
     height: 140%;
     padding: 0;
-    animation: fade .5s ease-in-out forwards;
+    animation: fade-nav .5s ease-in-out forwards;
 }
 
 .navigation-search-form.show{
@@ -168,7 +168,7 @@
 }
 
 
-@keyframes fade {
+@keyframes fade-nav {
     0%{
         width: 0vw;
     }
