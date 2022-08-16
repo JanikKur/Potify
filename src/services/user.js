@@ -33,7 +33,7 @@ export async function updateUser(userId, newData){
 }
 
 export async function deleteUser(userId){
-    
+    return axios.delete(`${backendLink}/user/${userId}`, { withCredentials: true });
 }
 
 export async function subscribePodcast(podcastId){
