@@ -48,7 +48,7 @@ export default function Podcast() {
             {showEpisodeSettings && <EpisodeSettings setPodcast={setPodcast} setShowEpisodeSettings={setShowEpisodeSettings} episode={currentEditEpisode}/>}
             {showSettings && <PodcastSettings setShowSettings={setShowSettings} setPodcast={setPodcast} podcast={podcast}/>}
             <div className="podcast-informations">
-                <img alt={podcast.title} src={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} />
+                <img alt={podcast.title} src={`${podcast.fileLinks[0]}`} />
                 <h2>{podcast.title}</h2>
                 <h4>{podcast.description}</h4>
                 <div className="podcast-controls">
@@ -60,7 +60,7 @@ export default function Podcast() {
             </div>
             <div className="episodes-list">
                 <h4>Alle Episoden:</h4>
-                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} setShowEpisodeSettings={setShowEpisodeSettings} setCurrentEditEpisode={setCurrentEditEpisode} episode={episode} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} title={episode.title} />)}
+                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} setShowEpisodeSettings={setShowEpisodeSettings} setCurrentEditEpisode={setCurrentEditEpisode} episode={episode} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${podcast.fileLinks[0]}`} title={episode.title} />)}
             </div>
         </main>
         </>
