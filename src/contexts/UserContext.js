@@ -90,7 +90,6 @@ export function UserProvider({ children }) {
             const result = await deleteUserService(currentUser._id);
             if (result.status === 200) {
                 await logout();
-                navigate('/');
             }
         }catch(err){
             throw new Error(err);

@@ -130,7 +130,7 @@ const deleteUser = async (req, res) => {
     if(req.params.id !== req.user._id) return res.sendStatus(401); //Check if user to update is also logged in user
     try {
         const user = await User.deleteOne({ _id: req.params.id });
-        res.status(201).json({ user });
+        res.status(200).json({ user });
     }
     catch (err) {
         res.status(500).json({ msg: err });

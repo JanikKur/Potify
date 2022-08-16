@@ -58,7 +58,7 @@ export default function Settings() {
                     </div>
                 </details>
                 <button disabled={isLoading} type='submit' className="main-button">{isLoading ? <Loading/> : 'Save'}</button>
-                <button className="delete-button" onClick={() => window.confirm('Do you really want to delete your Account') && deleteUser()}>Delete Account</button>
+                <button className="delete-button" onClick={(e) => {e.preventDefault(); window.confirm('Do you really want to delete your Account') && deleteUser()}}>Delete Account</button>
             </form>
         </main>
     )
