@@ -60,7 +60,7 @@ export default function Podcast() {
             </div>
             <div className="episodes-list">
                 <h4>Alle Episoden:</h4>
-                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} setShowEpisodeSettings={setShowEpisodeSettings} setCurrentEditEpisode={setCurrentEditEpisode} episode={episode} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} title={episode.title} />)}
+                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} podcastAuthor={podcast.author} setShowEpisodeSettings={setShowEpisodeSettings} setCurrentEditEpisode={setCurrentEditEpisode} episode={episode} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} title={episode.title} />)}
             </div>
         </main>
         </>
