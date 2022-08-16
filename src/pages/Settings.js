@@ -7,9 +7,11 @@ import Message from '../components/Message';
 export default function Settings() {
 
     
-    const {currentUser, updateUserData} = useUser();
+    const {currentUser, updateUserData, deleteUser} = useUser();
     const userNameRef = useRef();
     const emailRef = useRef();
+    const passwordRef = useRef();
+    const oldPasswordRef = useRef();
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState(null);
 
@@ -17,7 +19,7 @@ export default function Settings() {
         e.preventDefault();
         setIsLoading(true)
         try{
-            await updateUserData({username: userNameRef.current.value, email: emailRef.current.value});
+            await updateUserData({username: userNameRef.current.value, email: emailRef.current.value, password: passwordRef.current.value, oldPassword: oldPasswordRef.current.value});
             setMessage(prev => <Message message='Updated successfully' />);
         }catch(err){
             setMessage(prev => <Message message='Could not update, please try again' />);
@@ -47,16 +49,16 @@ export default function Settings() {
                     <div className="form">
                         <div className="form-group">
                             <label>Old Password</label>
-                            <input type="password" placeholder="Old Password" className="form-control" />
+                            <input type="password" ref={oldPasswordRef} placeholder="Old Password" className="form-control" />
                         </div>
                         <div className="form-group">
                             <label>New Password</label>
-                            <input type="password" placeholder="New Password" className="form-control" />
+                            <input type="password" ref={passwordRef} placeholder="New Password" className="form-control" />
                         </div>
                     </div>
                 </details>
-                <button disabled={isLoading} className="main-button">{isLoading ? <Loading/> : 'Save'}</button>
-                <button className="delete-button">Delete Account</button>
+                <button disabled={isLoading} type='submit' className="main-button">{isLoading ? <Loading/> : 'Save'}</button>
+                <button className="delete-button" onClick={(e) => {e.preventDefault(); window.confirm('Do you really want to delete your Account') && deleteUser()}}>Delete Account</button>
             </form>
         </main>
     )

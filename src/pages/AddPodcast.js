@@ -40,17 +40,17 @@ export default function AddPodcast() {
 
                 <div className="form-group">
                     <label>Title</label>
-                    <input type="text" placeholder="Title" ref={titleRef} className="form-control" required/>
+                    <input type="text" pattern='[a-zA-Z0-9-]+'  placeholder="Title" ref={titleRef} className="form-control" required/>
                 </div>
                 
                 <div className="form-group">
                     <label>Description</label>
-                    <input type="text" placeholder="Description" ref={descriptionRef} className="form-control" required/>
+                    <input type="text" pattern='[a-zA-Z0-9-]+'  placeholder="Description" ref={descriptionRef} className="form-control" required/>
                 </div>
                 
                 <div className="form-group">
                     <label>Genre</label>
-                    <input type="text" placeholder="Genre" ref={genreRef} className="form-control" required/>
+                    <input type="text" pattern='[a-zA-Z0-9-]+'  placeholder="Genre" ref={genreRef} className="form-control" required/>
                 </div>
                 <button disabled={isLoading} className="main-button" type="submit">{isLoading ? <Loading/> : 'Add Podcast'}</button>
             </form>

@@ -12,7 +12,7 @@ export default function NewPodcastSlider() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getAllPodcasts().then(res => {
+        getAllPodcasts(5).then(res => {
             setPodcasts(res.data.podcasts);
             setIsLoading(false);
         });

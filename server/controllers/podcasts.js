@@ -5,12 +5,12 @@ const path = require('path');
 const getAllPodcasts = async (req, res) => {
     try {
         let podcasts;
-        if(req.query.sort === 'trends'){
-            podcasts = await Podcast.find({}, {},{sort: {clicks: -1}}).skip(req.skipIndex).limit(req.limit);
-        } 
-        else{
-            podcasts = await Podcast.find({}, {},{sort: {date: -1}}).skip(req.skipIndex).limit(req.limit);
-        }  
+        if (req.query.sort === 'trends') {
+            podcasts = await Podcast.find({}, {}, { sort: { clicks: -1 } }).skip(req.skipIndex).limit(req.limit);
+        }
+        else {
+            podcasts = await Podcast.find({}, {}, { sort: { date: -1 } }).skip(req.skipIndex).limit(req.limit);
+        }
         res.status(200).json({ podcasts });
     }
     catch (err) {
@@ -20,7 +20,7 @@ const getAllPodcasts = async (req, res) => {
 
 const getPodcast = async (req, res) => {
     try {
-        const podcast = await Podcast.findOneAndUpdate({ _id: req.params.id }, { $inc: {clicks: 1} });
+        const podcast = await Podcast.findOneAndUpdate({ _id: req.params.id }, { $inc: { clicks: 1 } });
         res.status(200).json({ podcast });
     }
     catch (err) {
@@ -31,7 +31,7 @@ const getPodcast = async (req, res) => {
 const getPodcastByIds = async (req, res) => {
     try {
         const ids = JSON.parse(req.params.ids);
-        const podcasts = await Podcast.find({_id: {$in: ids}}).skip(req.skipIndex).limit(req.limit);
+        const podcasts = await Podcast.find({ _id: { $in: ids } }).skip(req.skipIndex).limit(req.limit);
         res.status(200).json({ podcasts });
     }
     catch (err) {
@@ -63,9 +63,9 @@ const getPodcastsByTitle = async (req, res) => {
 const playPodcast = async (req, res) => {
     const file = path.join(__dirname + '/../public/podcasts/' + req.params.file);
     let stat = null;
-    try{
+    try {
         stat = fs.statSync(file);
-    }catch(err){
+    } catch (err) {
         return res.status(404).json({ msg: `File "${req.params.file}" not found` });
     }
     const total = stat.size;
@@ -96,7 +96,6 @@ const playPodcast = async (req, res) => {
 }
 
 const updatePodcast = async (req, res) => {
-    if(req.params.id !== req.user._id) return res.sendStatus(401);
     try {
         const podcast = await Podcast.updateOne({ _id: req.params.id }, { $set: req.body });
         res.status(200).json({ podcast });
@@ -116,10 +115,24 @@ const addEpisode = async (req, res) => {
     }
 }
 
+const updateEpisode = async (req, res) => {
+    try {
+        const podcastAuthor = await Podcast.findOne({ "episodes.fileLinks.0": req.params.fileName }, { author: 1 });
+        if (podcastAuthor.author !== req.user._id) {
+            return res.status(401).json({ msg: "Unauthorized" });
+        }
+        const podcast = await Podcast.updateOne({ "episodes.fileLinks.0": req.params.fileName }, { $set: { "episodes.$.title": req.body.title } });
+        res.status(200).json({ podcast });
+    }
+    catch (err) {
+        res.status(500).json({ msg: err });
+    }
+}
+
 
 const addPodcast = async (req, res) => {
     try {
-        const podcast = await Podcast.create({...req.body, author: req.user._id, date: new Date().getTime()});
+        const podcast = await Podcast.create({ ...req.body, author: req.user._id, date: new Date().getTime() });
         res.status(201).json({ podcast });
     }
     catch (err) {
@@ -147,5 +160,6 @@ module.exports = {
     updatePodcast,
     addPodcast,
     deletePodcast,
-    addEpisode
+    addEpisode,
+    updateEpisode
 }

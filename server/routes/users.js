@@ -7,7 +7,7 @@ const validateUserToken = require('../utils/validateUserToken');
 
 const router = express.Router();
 
-router.get('/', getAllUsers); 
+/* router.get('/', getAllUsers);  */
 
 router.get('/id/:id', getUser);
 

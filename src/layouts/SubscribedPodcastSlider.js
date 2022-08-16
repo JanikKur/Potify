@@ -26,7 +26,7 @@ export default function SubscribedPodcastSlider() {
     return (
         <div className="slider-section">
             <div className='informations'>
-                <p>Subscribed Podcasts</p>
+                <p>Favorite Podcasts</p>
                 <Link to='/favorites' className='all-link'>view all</Link>
             </div>
             {isLoading ? <Loading/> : <PodcastSlider podcasts={podcasts}/>}

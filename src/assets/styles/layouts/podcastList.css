@@ -1,0 +1,15 @@
+.podcast-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.more-button{
+    margin: auto;
+    margin-top: 1rem;
+}
+

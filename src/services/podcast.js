@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-export async function getAllPodcasts(){
-    return await axios.get(`/api/v1/podcast/`);
+export async function getAllPodcasts(limit, page){
+    return await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast?limit=${limit}&page=${page}`);
 }
 
 
-export async function getTrendingPodcasts(){
-    return axios.get(`/api/v1/podcast?sort=trends`);
+export async function getTrendingPodcasts(limit, page){
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast?sort=trends&limit=${limit}&page=${page}`);
 }
 
 export async function getPodcastById(id){
@@ -39,6 +39,22 @@ export async function addEpisode(podcastId, title, file){
     formData.append('title', title);
     formData.append('file', file);
     return axios.put(`/api/v1/podcast/addEpisode/${podcastId}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+}
+
+export async function updateEpisode(episodeFileName, newData){
+    let formData = new FormData();
+    for (let elem in newData) {
+        formData.append(elem, newData[elem]);
+    }
+    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/updateEpisode/${episodeFileName}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+}
+
+export async function updatePodcast(podcastId, newData){
+    let formData = new FormData();
+    for (let elem in newData) {
+        formData.append(elem, newData[elem]);
+    }
+    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/id/${podcastId}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
 }
 
 export async function deletePodcast(podcastId){

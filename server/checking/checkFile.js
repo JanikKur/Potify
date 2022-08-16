@@ -32,12 +32,12 @@ const imageFileTypes = {
 
 function isImage(file){
     const extension = getFileExtension(file.name);
-    return imageFileTypes[extension];
+    return imageFileTypes[extension.toLowerCase()];
 }
 
 function isAudioFile(file){
     const extension = getFileExtension(file.name);
-    return audioFileTypes[extension];
+    return audioFileTypes[extension.toLowerCase()];
 }
 
 

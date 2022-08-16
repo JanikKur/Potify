@@ -55,7 +55,7 @@ export default function AddEpisode() {
 
                 <div className="form-group">
                     <label>Title</label>
-                    <input type="text" ref={titleRef} placeholder="Title" className="form-control" required/>
+                    <input type="text" pattern='[a-zA-Z0-9-]+' ref={titleRef} placeholder="Title" className="form-control" required/>
                 </div>
 
                 <div className="form-group">

@@ -32,6 +32,10 @@ export async function updateUser(userId, newData){
     return axios.put(`${backendLink}/user/${userId}`, formData, { withCredentials: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
 }
 
+export async function deleteUser(userId){
+    return axios.delete(`${backendLink}/user/${userId}`, { withCredentials: true });
+}
+
 export async function subscribePodcast(podcastId){
     return axios.put(`${backendLink}/user/subscribepodcast/${podcastId}`, { withCredentials: true });
 }
