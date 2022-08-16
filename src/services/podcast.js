@@ -21,8 +21,8 @@ export async function getPodcastByAuthor(id){
     return axios.get(`/api/v1/podcast/author/${id}`);
 }
 
-export async function getPodcastByTitle(title){
-    return axios.get(`/api/v1/podcast/title/${title}`);
+export async function getPodcastByTitle(title, limit, page){
+    return axios.get(`api/v1/podcast/title/${title}?limit=${limit}&page=${page}`);
 }
 
 export async function addPodcast(title, description, genre, image){

@@ -28,7 +28,7 @@ export default function Search() {
 
   function updatePodcasts(title, limit, page) {
     if (title) {
-      getPodcastByTitle(title).then(res => {
+      getPodcastByTitle(title, limit, page).then(res => {
         if(!res.data.podcasts.length) setMoreResults(false);
         setPodcasts(prev => [...prev, ...res.data.podcasts]);
         setIsLoading(false);
