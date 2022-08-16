@@ -33,12 +33,12 @@ const imageFileTypes = {
 
 export function isPodcastFile(file) {
     const extension = getFileExtension(file.name);
-    return audioFileTypes[extension];
+    return audioFileTypes[extension.toLowerCase()];
 }
 
 export function isImageFile(file) {
     const extension = getFileExtension(file.name);
-    return imageFileTypes[extension];
+    return imageFileTypes[extension.toLowerCase()];
 }
 
 function getFileExtension(filename) {

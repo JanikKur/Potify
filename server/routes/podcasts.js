@@ -1,5 +1,6 @@
 const express = require('express');
 const { getAllPodcasts, getPodcast, getPodcastByIds, getPodcastsByAuthor, getPodcastsByTitle, playPodcast, updatePodcast, addPodcast, deletePodcast, addEpisode, updateEpisode } = require('../controllers/podcasts');
+const { isPodcastAuthor } = require('../utils/isPodcastAuthor');
 const pagination = require('../utils/pagination');
 const saveFile = require('../utils/saveFile');
 const validateUserToken = require('../utils/validateUserToken');
@@ -25,10 +26,10 @@ router.get('/ids/:ids', pagination, getPodcastByIds);
 router.get('/play/:file', playPodcast);
 
 //Update a podcasts
-router.put('/id/:id', [validateUserToken, saveFile], updatePodcast);
+router.put('/id/:id', [validateUserToken, isPodcastAuthor, saveFile], updatePodcast);
 
 //Adds a Episode to a Podcast
-router.put('/addEpisode/:id', [validateUserToken, saveFile], addEpisode);
+router.put('/addEpisode/:id', [validateUserToken, isPodcastAuthor, saveFile], addEpisode);
 
 //Adds a Episode to a Podcast
 router.put('/updateEpisode/:fileName', validateUserToken, updateEpisode);
@@ -37,6 +38,6 @@ router.put('/updateEpisode/:fileName', validateUserToken, updateEpisode);
 router.post('/', [validateUserToken, saveFile], addPodcast);
 
 //Delete a podcast
-router.delete('/:id', deletePodcast);
+router.delete('/:id', [validateUserToken, isPodcastAuthor], deletePodcast);
 
 module.exports = router;
