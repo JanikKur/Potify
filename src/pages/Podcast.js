@@ -9,6 +9,8 @@ import { deletePodcast as deletePodcastService, getPodcastById } from '../servic
 import {useUser} from '../contexts/UserContext';
 import {useEpisode} from '../contexts/EpisodeContext';
 import Loading from '../components/Loading';
+import EpisodeSettings from '../components/EpisodeSettings';
+import PodcastSettings from '../components/PodcastSettings';
 
 export default function Podcast() {
 
@@ -16,7 +18,10 @@ export default function Podcast() {
 
     const [podcast, setPodcast] = useState(null);
     const {currentEpisode, updateEpisode, setCurrentTitle} = useEpisode();
+    const [currentEditEpisode, setCurrentEditEpisode] = useState(null);
     const {currentUser, toggleSubscription, isSubscribed} = useUser();
+    const [showSettings, setShowSettings] = useState(false);
+    const [showEpisodeSettings, setShowEpisodeSettings] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -35,29 +40,27 @@ export default function Podcast() {
         }
     }
 
-    function editPodcast(){
-
-    }
-
     if(isLoading) return <main><Loading/></main>
     if(!podcast || !currentEpisode) return null;
     return (
         <>
         <main className="podcast">
+            {showEpisodeSettings && <EpisodeSettings setPodcast={setPodcast} setShowEpisodeSettings={setShowEpisodeSettings} episode={currentEditEpisode}/>}
+            {showSettings && <PodcastSettings setShowSettings={setShowSettings} setPodcast={setPodcast} podcast={podcast}/>}
             <div className="podcast-informations">
-                <img alt="Teest" src={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} />
+                <img alt={podcast.title} src={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} />
                 <h2>{podcast.title}</h2>
                 <h4>{podcast.description}</h4>
                 <div className="podcast-controls">
                     {currentUser && <button className="icon-button" onClick={() => toggleSubscription(podcast._id)}>{isSubscribed(podcast._id) ? <BsFillHeartFill className="subscribed"/> : <BiHeart/>}</button>}
                     {currentUser && currentUser._id ===  podcast.author && <Link to={`/addepisode?id=${podcast._id}`} className="icon-link"><BiAddToQueue/></Link>}
-                    {currentUser && currentUser._id ===  podcast.author && <button className="icon-button" onClick={editPodcast}><BiEditAlt/></button>}
+                    {currentUser && currentUser._id ===  podcast.author && <button className="icon-button" onClick={() => setShowSettings(true)}><BiEditAlt/></button>}
                     {currentUser && currentUser._id ===  podcast.author && <button className="icon-button" onClick={deletePodcast}><RiDeleteBin6Line/></button>}
                 </div>
             </div>
             <div className="episodes-list">
                 <h4>Alle Episoden:</h4>
-                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} title={episode.title} />)}
+                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} setShowEpisodeSettings={setShowEpisodeSettings} setCurrentEditEpisode={setCurrentEditEpisode} episode={episode} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`${process.env.REACT_APP_BACKEND_URL}/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${process.env.REACT_APP_BACKEND_URL}${podcast.fileLinks[0]}`} title={episode.title} />)}
             </div>
         </main>
         </>

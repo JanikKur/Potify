@@ -13,7 +13,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = process.env.BACKEND_PORT || 8080;
+const PORT = process.env.PORT || 8080;
 const environment = process.env.NODE_ENV;
 const isDevelopment = environment === 'development'; 
 const app = express();
@@ -40,7 +40,7 @@ app.use(compression());
 
 /*--CORS--*/
 isDevelopment && app.use(cors({
-    origin: ['http://localhost:3000', 'http://192.168.2.100:3000', 'http://172.20.10.2:3000'],
+    origin: ['http://localhost:5001', 'http://192.168.2.100:5001'],
     credentials: true
 }));
 

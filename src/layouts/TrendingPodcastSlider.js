@@ -12,7 +12,7 @@ export default function TrendingPodcastSlider() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getTrendingPodcasts().then(res => {
+        getTrendingPodcasts(5).then(res => {
             setPodcasts(res.data.podcasts);
             setIsLoading(false);
         });

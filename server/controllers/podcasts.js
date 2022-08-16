@@ -96,7 +96,6 @@ const playPodcast = async (req, res) => {
 }
 
 const updatePodcast = async (req, res) => {
-    if(req.params.id !== req.user._id) return res.sendStatus(401);
     try {
         const podcast = await Podcast.updateOne({ _id: req.params.id }, { $set: req.body });
         res.status(200).json({ podcast });
@@ -109,6 +108,16 @@ const updatePodcast = async (req, res) => {
 const addEpisode = async (req, res) => {
     try {
         const podcast = await Podcast.updateOne({ _id: req.params.id }, { $push: { episodes: { ...req.body, date: new Date().getTime() } } });
+        res.status(200).json({ podcast });
+    }
+    catch (err) {
+        res.status(500).json({ msg: err });
+    }
+}
+
+const updateEpisode = async (req, res) => {
+    try {
+        const podcast = await Podcast.updateOne({ "episodes.fileLinks.0": req.params.fileName }, { $set: { "episodes.$.title": req.body.title } });
         res.status(200).json({ podcast });
     }
     catch (err) {
@@ -147,5 +156,6 @@ module.exports = {
     updatePodcast,
     addPodcast,
     deletePodcast,
-    addEpisode
+    addEpisode,
+    updateEpisode
 }

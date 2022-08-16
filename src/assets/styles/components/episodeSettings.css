@@ -1,0 +1,37 @@
+.episode-settings-wrapper{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(0,0,0,.5);
+    padding: 1rem;
+}
+
+.episode-settings{
+    padding: 1rem;
+    background-color: rgba(255,255,255,1);
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    opacity: 0;
+    animation: fade .3s linear forwards;
+}
+
+.episode-settings h3{
+    margin: 0;
+}
+
+.cancel-button{
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: red;
+    cursor: pointer;
+}

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllPodcasts, getPodcast, getPodcastByIds, getPodcastsByAuthor, getPodcastsByTitle, playPodcast, updatePodcast, addPodcast, deletePodcast, addEpisode } = require('../controllers/podcasts');
+const { getAllPodcasts, getPodcast, getPodcastByIds, getPodcastsByAuthor, getPodcastsByTitle, playPodcast, updatePodcast, addPodcast, deletePodcast, addEpisode, updateEpisode } = require('../controllers/podcasts');
 const pagination = require('../utils/pagination');
 const saveFile = require('../utils/saveFile');
 const validateUserToken = require('../utils/validateUserToken');
@@ -25,10 +25,13 @@ router.get('/ids/:ids', pagination, getPodcastByIds);
 router.get('/play/:file', playPodcast);
 
 //Update a podcasts
-router.put('/:id', validateUserToken, updatePodcast);
+router.put('/id/:id', [validateUserToken, saveFile], updatePodcast);
 
 //Adds a Episode to a Podcast
 router.put('/addEpisode/:id', [validateUserToken, saveFile], addEpisode);
+
+//Adds a Episode to a Podcast
+router.put('/updateEpisode/:fileName', validateUserToken, updateEpisode);
 
 //Add new podcast
 router.post('/', [validateUserToken, saveFile], addPodcast);
