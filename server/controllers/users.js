@@ -108,6 +108,9 @@ const unsubscribePodcast = async (req, res) => {
 //Add a User
 const addUser = async (req, res) => {
     try {
+        if(await User.findOne({email: req.body.email})){ //Email already exists
+            return res.sendStatus(400);
+        }
         let hashedPassword = await hashPassword(req.body.password);
         const user = await User.create({...req.body, password: hashedPassword});
         res.status(201).json({ user });
