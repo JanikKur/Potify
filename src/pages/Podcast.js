@@ -60,7 +60,7 @@ export default function Podcast() {
             </div>
             <div className="episodes-list">
                 <h4>Alle Episoden:</h4>
-                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} setShowEpisodeSettings={setShowEpisodeSettings} setCurrentEditEpisode={setCurrentEditEpisode} episode={episode} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${podcast.fileLinks[0]}`} title={episode.title} />)}
+                {!podcast.episodes.length ? 'No Episodes yet' : podcast.episodes.map((episode, idx) => <Episode key={idx} podcastAuthor={podcast.author} setShowEpisodeSettings={setShowEpisodeSettings} setCurrentEditEpisode={setCurrentEditEpisode} episode={episode} onClick={link => {updateEpisode(link); setCurrentTitle(episode.title)}} currentEpisode={currentEpisode} episodeLink={`/api/v1/podcast/play/${episode.fileLinks[0]}`} image={`${podcast.fileLinks[0]}`} title={episode.title} />)}
             </div>
         </main>
         </>
