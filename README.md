@@ -7,6 +7,7 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 cd Potify---Podcast-App
 npm i
+npm run build
 npm run start
 ```
 
